@@ -25,3 +25,8 @@ yarn-error.log*
 .cache/
 .vscode/
 dist/
+
+yarn.lock*
+package-lock.json*
+package-lock*
+sessions/
