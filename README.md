@@ -31,4 +31,4 @@ Using React, express(nodejs framework) and truffle, we will make web server for 
 
 <h3> Contract </h3>
 <img src="./markdown_img/request_model.png">
-Through the chainlink external adapter, we will get approved insurance data from oracle Node. When chainlink client request an information, 
+Through the chainlink external adapter, we will get approved insurance data from oracle Node. When chainlink client request an information, oracle contract request to oracle node and oracle node give requested information using json as you can see above. Using that json, smartcontract will be operated and it will give insurance payment if it corresponds to a written code.
