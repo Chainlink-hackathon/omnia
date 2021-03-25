@@ -26,3 +26,9 @@
 <h3> Develop Process </h3>
 
 <img src="./markdown_img/Develop_process.png">
+
+Using React, express(nodejs framework) and truffle, we will make web server for communicating with client. React for client screen, express for backend server and truffle for smartcontract deploy. Also we will make smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. 
+
+<h3> Contract </h3>
+<img src="./markdown_img/request_model.png">
+Through the chainlink external adapter, we will get approved insurance data from oracle Node. When chainlink client request an information, 
