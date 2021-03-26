@@ -30,9 +30,12 @@ We serve as a platform for connecting small needs that individuals have. It recr
 <br>
 <h4> Omnia's Advantages </h4>
 <img src="./markdown_img/f1.png">
+It was difficult to receive insurance money because of an accident in the existing p2p insurance. Of course, there are cases in some insurance that reduce up to 90 percent, but it is rare. The reason may be that there are risks in terms of profitability. Omnia intends to use blockchain technology not only for the process of insurance procedures, but also for the formation of profitable models. Using DEFI technology, it is intended to be returned to the user by dividing the amount collected from the entire population, excluding the premium deducted. At this time, the fee for the platform was set very low at 5%. Still, the company can take a stable profit model. This is because there is revenue operated by fees and DEFI. Currently, we envision a model for making DAI of MakerDAo and Staking of Compound. A more specific liquidity management protocol will be disclosed at the final submission. 
+<br>
 <img src="./markdown_img/f2.png">
+<br>
 <img src="./markdown_img/f3.png">
-
+<br>
 
 
 
