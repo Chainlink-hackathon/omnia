@@ -3,7 +3,7 @@
 
 
 
-<p align="center"><img src="./markdown_img/Omnia_real.png"></p>
+<p align="center"><img src="./markdown_img/Omia_real.png"></p>
 
 
 
