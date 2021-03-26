@@ -3,7 +3,7 @@
 
 
 
-<p align="center"><img src="./markdown_img/omnia.png" "height : 400px" ></p>
+<p align="center"><img src="./markdown_img/omnia.png"></p>
 
 
 
@@ -16,13 +16,16 @@
 | Lee JeongMin 	| SmartContract Developer	|
 | Jeong Chaewon 	| Project Manager  |
 
+<h3>2.  Introduction </h3>
 
-<h3> Service Architecture </h3>
+<h3>3.  Service Features </h3>
+
+<h3> 4. Service Architecture </h3>
 
 <img src="./markdown_img/Service_Architecture.png">
 
 
-<h3> Develop Process </h3>
+<h3> 5. Develop Process </h3>
 
 <img src="./markdown_img/Develop_process.png">
 
