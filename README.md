@@ -1,4 +1,5 @@
-# Omnia: Blockchain-based P2P Insurance Platform
+#Chainlink Virtual Hackathon Spring 2021
+Omnia: Blockchain-based P2P Insurance Platform
 
 
 
