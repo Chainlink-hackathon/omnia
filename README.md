@@ -3,7 +3,7 @@
 
 
 
-<p align="center"><img src="./markdown_img/omnia.png"></p>
+<p align="center"><img src="./markdown_img/omnia.png" "height : 500px" ></p>
 
 
 
