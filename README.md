@@ -29,6 +29,11 @@ We serve as a platform for connecting small needs that individuals have. It recr
 <img src="./markdown_img/Process.png">
 <br>
 <h4> Omnia's Advantages </h4>
+<img src="./markdown_img/f1.png">
+<img src="./markdown_img/f2.png">
+<img src="./markdown_img/f3.png">
+
+
 
 
 <h3> 4. Service Architecture </h3>
