@@ -3,7 +3,7 @@ Omnia: Blockchain-based P2P Insurance Platform
 
 
 
-<p align="center"><img src="./markdown_img/omnia_logo.png" height = "300px" width= "300px"></p>
+<p align="center"><img src="./markdown_img/omnia.png" height = "300px" width= "300px"></p>
 
 
 ## 2021 ChainLink Hackathon Team Omnia's project
