@@ -23,9 +23,11 @@ As such, we decided to make catchphrase in hopes of safely distributing risks th
 Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with a blockchain.
 
 <h3>3.  Service Features </h3>
+
+We serve as a platform for connecting small needs that individuals have. It recruits members from inside the platform, competes with insurance companies for insurance with the best benefits, and conducts negotiations to open insurance. Inform members of the results of the negotiations and guide members to sign up. At this time, the entire process from subscription to payment of screening was designed to introduce smart contract technology. <br>
+-Process
 <img src="./markdown_img/Process.png">
 
-We serve as a platform for connecting small needs that individuals have. It recruits members from inside the platform, competes with insurance companies for insurance with the best benefits, and conducts negotiations to open insurance. Inform members of the results of the negotiations and guide members to sign up. At this time, the entire process from subscription to payment of screening was designed to introduce smart contract technology.
 
 <h3> 4. Service Architecture </h3>
 
