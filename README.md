@@ -7,14 +7,14 @@
 
 
 
-<h3> Member </h3>
+<h3>1.  Member </h3>
 
 | Name   	| Role                         	|
 |--------	|-------------------------------	|
-| Kim HeeYun  	| Backend |
-| Lee YongWook 	| Frontend |
-| Lee JeongMin 	| SmartContract 	|
-| Jeong Chaewon 	| PM  |
+| Kim HeeYun  	| Back-end Developer |
+| Lee YongWook 	| Front-end Developer |
+| Lee JeongMin 	| SmartContract Developer	|
+| Jeong Chaewon 	| Project Manager  |
 
 
 <h3> Service Architecture </h3>
