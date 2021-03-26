@@ -8,16 +8,18 @@ import cors from 'cors';
 import FileStore = require('session-file-store');
 const useFileStore = FileStore(session);
 
+// Routing
 import { indexRouter } from './routes/index';
 
+// PORT
 const app = express();
 const PORT = 3001;
 
-app.set('views', path.join(__dirname, '../src/views'));
-app.set('view engine', 'ejs');
+// View Engines
+app.set('views', path.join(__dirname, '../../client/build'));
+app.set('view engine', 'html');
 
 app.use(cors());
-
 app.use(
   session({
     secret: 'omniapwd',
@@ -30,13 +32,13 @@ app.use(
     },
   })
 );
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../../client/build')));
 
+// Routing
 app.get('/', indexRouter);
 
 // catch 404 and forward to error handler
