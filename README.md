@@ -39,7 +39,8 @@ Finally, we also try to minimize the chronic 'oracle problem' experienced by exi
 <br>
 <img src="./markdown_img/f3.png">
 <br>
-
+We also considered ways to improve UX from the perspective of consumers. So what we've come up with is two functions. It will gradually introduce functions such as ordering and consulting by voice by linking voice recognition api inside the web. It is expected that this will improve the quality of experience for the underprivileged who are struggling with the IT UI.
+In addition, in addition to the automatic upload function that Verifier automatically sends documents, we will also introduce the function to manually upload insurance review documents by linking OCR API.
 
 
 <h3> 4. Service Architecture </h3>
