@@ -7,6 +7,7 @@
 
 
 
+
 <h3>1.  Member </h3>
 
 | Name   	| Role                         	|
@@ -17,6 +18,10 @@
 | Jeong Chaewon 	| Project Manager  |
 
 <h3>2.  Introduction </h3>
+“Uni navi ne committas omnia” is a Latin saying, ‘Don’t leave everything in one boat.’ 
+As such, we decided to make catchphrase in hopes of safely distributing risks through our platform. 
+
+Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with a blockchain.
 
 <h3>3.  Service Features </h3>
 
