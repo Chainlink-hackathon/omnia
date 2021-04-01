@@ -15,7 +15,7 @@
 | Kim HeeYoun  	| Back-end Developer |
 | Lee YongWook 	| Front-end Developer |
 | Lee JeongMin 	| SmartContract Developer	|
-| Jeong Chaewon 	| Project Manager  |
+| Jeong Chaewon 	| Project Manager & AI Developer  |
 
 <h3>2.  Introduction </h3>
 “Uni navi ne committas omnia” is a Latin saying, ‘Don’t leave everything in one boat.’ <br>
