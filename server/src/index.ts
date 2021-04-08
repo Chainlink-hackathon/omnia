@@ -13,7 +13,7 @@ import { indexRouter } from './routes/index';
 
 // PORT
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // View Engines
 app.set('views', path.join(__dirname, '../../client/build'));
