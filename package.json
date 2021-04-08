@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Chainlink-hackathon/omnia/issues"
   },
-  "homepage": "https://github.com/Chainlink-hackathon/omnia#readme"
+  "homepage": "https://github.com/Chainlink-hackathon/omnia#readme",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
