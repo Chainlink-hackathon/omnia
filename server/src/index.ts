@@ -14,8 +14,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // View Engines
-app.use(express.static(path.join(__dirname, '/client/build')));
-app.set('views', path.join(__dirname, '/client/build'));
+app.use('/client', express.static(path.join(__dirname, 'build')));
+app.set('views', path.join(__dirname, '../../client/build'));
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 
