@@ -3,11 +3,8 @@ import createError from 'http-errors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import session from 'express-session';
 import cors from 'cors';
-import FileStore = require('session-file-store');
-const useFileStore = FileStore(session);
-import ejs from 'ejs';
+import engines from 'consolidate';
 
 // Routing
 import { indexRouter } from './routes/index';
@@ -17,24 +14,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // View Engines
-app.use(express.static(path.join(__dirname, '../../client/build')));
-app.set('views', path.join(__dirname, '../../client/build'));
-app.engine('html', ejs.renderFile);
+app.use(express.static(path.join(__dirname, '/client/build')));
+app.set('views', path.join(__dirname, '/client/build'));
+app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 
 app.use(cors());
-app.use(
-  session({
-    secret: 'omniapwd',
-    resave: false,
-    store: new useFileStore(),
-    cookie: {
-      httpOnly: false,
-      secure: false,
-      maxAge: 1200000,
-    },
-  })
-);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
