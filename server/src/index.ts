@@ -3,40 +3,29 @@ import createError from 'http-errors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import session from 'express-session';
 import cors from 'cors';
-import FileStore = require('session-file-store');
-const useFileStore = FileStore(session);
+import engines from 'consolidate';
 
+// Routing
 import { indexRouter } from './routes/index';
 
+// PORT
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-app.set('views', path.join(__dirname, '../src/views'));
-app.set('view engine', 'ejs');
+// View Engines
+app.use('/client', express.static(path.join(__dirname, 'build')));
+app.set('views', path.join(__dirname, '../../client/build'));
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
 
 app.use(cors());
-
-app.use(
-  session({
-    secret: 'omniapwd',
-    resave: false,
-    store: new useFileStore(),
-    cookie: {
-      httpOnly: false,
-      secure: false,
-      maxAge: 1200000,
-    },
-  })
-);
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// Routing
 app.get('/', indexRouter);
 
 // catch 404 and forward to error handler

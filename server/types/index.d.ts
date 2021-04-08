@@ -4,3 +4,4 @@ declare module 'morgan';
 declare module 'express-session';
 declare module 'session-file-store';
 declare module 'cors';
+declare module 'express-react-views';
