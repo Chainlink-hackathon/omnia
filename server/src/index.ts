@@ -17,6 +17,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // View Engines
+app.use(express.static(path.join(__dirname, '../../client/build')));
 app.set('views', path.join(__dirname, '../../client/build'));
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
@@ -35,7 +36,6 @@ app.use(
   })
 );
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, '../../client/build')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
