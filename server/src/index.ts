@@ -7,7 +7,7 @@ import session from 'express-session';
 import cors from 'cors';
 import FileStore = require('session-file-store');
 const useFileStore = FileStore(session);
-import engines from 'consolidate';
+import ejs from 'ejs';
 
 // Routing
 import { indexRouter } from './routes/index';
@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 
 // View Engines
 app.set('views', path.join(__dirname, '../../client/build'));
-app.engine('html', engines.mustache);
+app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
 app.use(cors());
