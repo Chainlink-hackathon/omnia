@@ -1,6 +1,8 @@
 pragma solidity ^0.6.0;
 
-contract Insurance {
+import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
+
+contract Insurance is ChainlinkClient {
     address payable owner;
     uint256 unit;
     uint256 remain;
@@ -80,5 +82,11 @@ contract Insurance {
     function payTarget() public view returns (uint256) {
         return clientInfo[msg.sender].status;
     }
+    
+    
+    /* To use chainlink, contract has some LINK token and after the end, rest of LINK will be recalled */
+    // function withdrawLINK(address to, uint256 value) public onlyOwner {
+    //     require(LINK.transfer(to, value), "Not enough LINK");
+    // }
     
 }
