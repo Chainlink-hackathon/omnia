@@ -96,10 +96,9 @@ contract Insurance is ChainlinkClient{
     function withdraw(uint256 amount) public {
         require(clientInfo[msg.sender].status == 1); // can withdraw when they have right to withdraw.
         require(address(this).balance >= amount);
-        require(clientInfo[msg.sender].balances >= amount);
         remain -= amount;
         amount = amount * unit;
-        clientInfo[msg.sender].balances -= amount;
+        // clientInfo[msg.sender].balances -= amount;
         clientInfo[msg.sender].status = 0;
         numOfrecevied++;
         msg.sender.transfer(amount);
