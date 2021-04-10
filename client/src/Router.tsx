@@ -8,6 +8,7 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Loading from './pages/Intro/intro';
 import Main from './pages/Main/main';
+import InsuranceList from './pages/InsuranceList/insuranceList';
 
 interface MatchParams {
   id: string;
@@ -29,6 +30,7 @@ function Router({ location }: RouteComponentProps<MatchParams>) {
               component={Loading}
             />
             <Route path="/main" component={Main} />
+            <Route path="/insuranceList" component={InsuranceList} />
           </Switch>
         </section>
       </CSSTransition>
