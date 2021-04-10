@@ -1,8 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import Bg from '../../assets/Insurance_List.png';
 
-export default function Main() {
+export default function Main(): JSX.Element {
   return (
     <img
       src={Bg}

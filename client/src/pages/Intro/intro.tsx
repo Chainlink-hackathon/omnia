@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useEffect } from 'react';
 import { WaveGroup } from './wavegroup.js';
 import Logo from '../../assets/Loading_logo.png';
 import { Link } from 'react-router-dom';
 
-export default function Intro() {
+export default function Intro(): JSX.Element {
   let canvas: any;
   const ref = useRef(null);
   let ctx: any;

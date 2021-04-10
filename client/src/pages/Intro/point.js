@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export class Point {
   constructor(index, x, y) {
     this.x = x;

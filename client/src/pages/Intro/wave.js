@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Point } from './point.js';
 export class Wave {
   constructor(index, totalPoints, color) {

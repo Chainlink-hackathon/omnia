@@ -1,8 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import MainBackground from '../../assets/Main_Background.png';
 
-export default function Main() {
+export default function Main(): JSX.Element {
   return (
     <img
       src={MainBackground}
