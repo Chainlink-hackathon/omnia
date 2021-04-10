@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 import * as engines from 'consolidate';
+import * as mysql from 'mysql';
 
 // Routing
 import { indexRouter } from './routes/index';
@@ -25,13 +26,60 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// DB
+const conn = mysql.createConnection({
+  host: 'us-cdbr-east-03.cleardb.com',
+  user: 'b312eaab7a44ed',
+  password: '6880b72a',
+  port: 3306,
+  database: 'heroku_82ba81f3f5ed25f',
+});
+
 // Routing
 app.get('/', indexRouter);
 
-app.post('/api/data', (req, res) => {
-  res.json({
-    response: '자알왔다잉',
-  });
+// Create Insurance
+app.post('/api/create', async (req, res) => {
+  const code = req.body.confirmationCode;
+  const name = req.body.name;
+  const dueDate = req.body.dueDate;
+  const walletAddress = req.body.walletAddress;
+
+  conn.query(
+    `INSERT INTO insurance(confirmation_code, name, due_date, wallet_address) VALUES(?, ?, ?, ?)`,
+    [code, name, dueDate, walletAddress],
+    (err, rows, fields) => {
+      if (err) {
+        res.json({ code: 0 });
+        throw err;
+      } else {
+        res.json({ code: 1 });
+      }
+    }
+  );
+});
+
+// Get Insurance Data
+app.post('/api/myPage', async (req, res) => {
+  const walletAddress = req.body.walletAddress;
+
+  conn.query(
+    `SELECT * FROM insurance WHERE wallet_address=?`,
+    [walletAddress],
+    (err, rows, fields) => {
+      if (err) {
+        res.json({ code: 0 });
+        throw err;
+      } else {
+        res.json({
+          code: 1,
+          confirmationCode: rows[0].confirmation_code,
+          name: rows[0].name,
+          dueDate: rows[0].due_date,
+        });
+      }
+    }
+  );
 });
 
 // catch 404 and forward to error handler
