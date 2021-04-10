@@ -6,6 +6,13 @@ import logger from 'morgan';
 import cors from 'cors';
 import * as engines from 'consolidate';
 import * as mysql from 'mysql';
+import Web3 from 'web3';
+
+const web3 = new Web3('http://localhost:8545');
+const insuranceContract = new web3.eth.Contract(
+  [],
+  '0x01E293f1f1dFcF7619cB792B6624E9e1969156fA'
+);
 
 // Routing
 import { indexRouter } from './routes/index';
@@ -45,6 +52,13 @@ app.post('/api/create', async (req, res) => {
   const dueDate = req.body.dueDate;
   const walletAddress = req.body.walletAddress;
 
+  await insuranceContract.methods
+    .insurancePayment()
+    .send()
+    .on('receipt', (receipt: any) => {
+      console.log(receipt);
+    });
+
   conn.query(
     `INSERT INTO insurance(confirmation_code, name, due_date, wallet_address) VALUES(?, ?, ?, ?)`,
     [code, name, dueDate, walletAddress],
@@ -63,6 +77,20 @@ app.post('/api/create', async (req, res) => {
 app.post('/api/myPage', async (req, res) => {
   const walletAddress = req.body.walletAddress;
 
+  const balance = await insuranceContract.methods
+    .balance()
+    .call()
+    .on('receipt', (receipt: any) => {
+      console.log(receipt);
+    });
+
+  const contractBalance = await insuranceContract.methods
+    .getInsruanceBalance()
+    .call()
+    .on('receipt', (receipt: any) => {
+      console.log(receipt);
+    });
+
   conn.query(
     `SELECT * FROM insurance WHERE wallet_address=?`,
     [walletAddress],
@@ -76,10 +104,24 @@ app.post('/api/myPage', async (req, res) => {
           confirmationCode: rows[0].confirmation_code,
           name: rows[0].name,
           dueDate: rows[0].due_date,
+          balance: balance,
+          contractBalance: contractBalance,
         });
       }
     }
   );
+});
+
+app.post('/api/withdraw', async (req, res) => {
+  await insuranceContract.methods
+    .withdraw()
+    .send()
+    .on('receipt', (receipt: any) => {
+      console.log(receipt);
+      res.json({
+        receipt: receipt,
+      });
+    });
 });
 
 // catch 404 and forward to error handler
