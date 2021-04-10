@@ -4,7 +4,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
-import engines from 'consolidate';
+import * as engines from 'consolidate';
 
 // Routing
 import { indexRouter } from './routes/index';
