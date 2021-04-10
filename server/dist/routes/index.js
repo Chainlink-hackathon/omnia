@@ -9,4 +9,9 @@ exports.indexRouter = express_1.default.Router();
 exports.indexRouter.get('/', (req, res) => {
     res.render('index.html');
 });
+exports.indexRouter.post('/', (req, res) => {
+    res.json({
+        response: '자알왔다잉',
+    });
+});
 //# sourceMappingURL=index.js.map
