@@ -14,9 +14,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // View Engines
-app.use('/client', express.static(path.join(__dirname, 'build')));
-app.set('views', path.join(__dirname, '../../client/build'));
+app.use(express.static(path.join(__dirname, '../../client/build')));
 app.engine('html', engines.mustache);
+app.set('views', path.join(__dirname, '../../client/build'));
 app.set('view engine', 'html');
 
 app.use(cors());
@@ -27,6 +27,12 @@ app.use(cookieParser());
 
 // Routing
 app.get('/', indexRouter);
+
+app.post('/api/data', (req, res) => {
+  res.json({
+    response: '자알왔다잉',
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

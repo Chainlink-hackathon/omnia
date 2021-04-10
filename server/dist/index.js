@@ -35,9 +35,9 @@ const index_1 = require("./routes/index");
 const app = express_1.default();
 const PORT = process.env.PORT || 3001;
 // View Engines
-app.use('/client', express_1.default.static(path_1.default.join(__dirname, 'build')));
-app.set('views', path_1.default.join(__dirname, '../../client/build'));
+app.use(express_1.default.static(path_1.default.join(__dirname, '../../client/build')));
 app.engine('html', engines.mustache);
+app.set('views', path_1.default.join(__dirname, '../../client/build'));
 app.set('view engine', 'html');
 app.use(cors_1.default());
 app.use(morgan_1.default('dev'));
@@ -46,6 +46,11 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use(cookie_parser_1.default());
 // Routing
 app.get('/', index_1.indexRouter);
+app.post('/api/data', (req, res) => {
+    res.json({
+        response: '자알왔다잉',
+    });
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(http_errors_1.default(404));
