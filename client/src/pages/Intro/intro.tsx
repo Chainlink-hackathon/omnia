@@ -42,7 +42,7 @@ export default function Intro() {
   };
   return (
     <>
-      <canvas ref={ref} style={{ width: '100%', height: '100%' }} />
+      <canvas ref={ref} style={{ width: '100vw', height: '100vh' }} />
       <Link to={'/main'}>
         <img
           src={Logo}
