@@ -289,6 +289,16 @@ Using React, express(nodejs framework), we made web server for communicating wit
 
 > 7. ***giveRight*** —>Contract Issuer makes the status of a particular client 1 If clstatus is true (i.e. the original goal was to get data from an external adapter when certified by the insurer and change the status corresponding to the person's address to 1, but after a certain period of time using alarm clock as an alternative, the contract issuer enters and executes the insured's address).
 > 
+>```js
+>function giveRight(address targetClient) public {
+>        require(owner == msg.sender);
+>        if(clstatus == true)
+>        {
+>            clientInfo[targetClient].status = 1;
+>            clstatus = false;
+>        }
+>    }
+>```
 > 8. ***withdraw()*** —> All balance withdrawals in the contract
 > 
 > 9. ***withdraw(uintamount)*** —> a function that allows withdrawals and payments to be made only by those authorized to pay insurance.
