@@ -17,7 +17,7 @@
 | JeongMin Lee	| SmartContract Developer	|
 | Chaewon Jeong 	| Project Manager |
 
----
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 
 <h3>2.  Inspiration  </h3>
@@ -34,13 +34,13 @@ As such, we decided to make catchphrase in hopes of safely distributing risks th
 Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with blockchain.
 
 
----
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 <h3>3.  Service Features </h3>
 
 We serve as a platform for connecting small needs that individuals have. Specifically, Recruit people who want to be guaranteed risks, and create insurance groups when a certain number of people gather in our platform. Then, Customers check the price and benefits and get insurance with higher benefits and lower costs than traditional insurance. Finally, in the total amount of insurance money each paid, insurance money shall be paid in the event of an accident. At this time, the entire process from subscription to payment of screening was designed to introduce smart contract technology. <br>
 
----
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 <h4> Service Process </h4>
 <img src="./markdown_img/flow.png">
@@ -60,7 +60,7 @@ We also considered ways to improve UX from the perspective of consumers. So what
 In addition, in addition to the automatic upload function that Verifier automatically sends documents, we will also introduce the function to manually upload insurance review documents by linking OCR API. As we are still students, we can't cope with cloud charges because we can't afford it now, so we haven't developed each technology and connected it completely, but we will also connect additional functions when we carry out our business in the future.
 
 
----
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 <h3> 4. Service Architecture </h3>
 
@@ -76,7 +76,7 @@ Omnia operated a web server and also linked AAVE Protocol to utilize defi. AAVE 
 To be specific, transfer the ether sent to the metamask to the AAVE Reserve Lending Pool. The transferred ether can be stored in the AAVE Wallet and converts the ETH into DAI through the built-in SWAP functionality of the AAVE platform. The DAI is deposited in the AAVE Staking Pool, and the revenue generated at this time is stored in the AAVE Wallet and transferred to the Metamask Wallet. For liquidity, it was developed that all amounts transferred to the Omnia platform could be automatically deposited into Pool at a set rate, rather than staking.
 <br>
 
----
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 <h3> 5. Develop Process </h3>
 
@@ -395,7 +395,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >```
 
 
----
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 <h3> 6.What's next for Omnia </h3>
 ---
@@ -441,14 +441,6 @@ In the same context, additional features such as OCR and STT (voice recognition)
 
 [![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
-## ➤ Contributors
-[<img alt="HeeYoun Kim" src="https://avatars.githubusercontent.com/u/52766951?v=4" width="100">](https://github.com/miiunii) | [<img alt="YongWook Lee" src="https://avatars2.githubusercontent.com/u/46441280?s=460&v=4" width="100">](https://instagram.com/yongwookLee) | [<img alt="JeongMin Lee" src="https://avatars.githubusercontent.com/u/53992007?v=44" width="100">](https://github.com/hustle-dev) | [<img alt="Chaewon Jeong" src="https://avatars.githubusercontent.com/u/57611054?v=4" width="100">](https://github.com/chaewon1121) |
-|:-----:|:-----:|:-----:|:-----:|
-| [HeeYoun Kim](hhttps://github.com/miiunii) | [YongWook Lee](https://github.com/yongwookLee)  | [JeongMin Lee](https://instagram.com/hustle-dev)      | [Chaewon Jeong](https://github.com/chaewon1121)   | 
-| 🐹  | 🐻‍❄️  | 🐵    | 🐶  | 
-| Back-end Developer  | Front-end Developer  | Smart Contract Developer    | Product Manager  | 
-
-
 <h3> 7. Results </h3>
 
 #### Webstie URL 
@@ -459,6 +451,16 @@ Please consider that the speed is a bit slow using the free domain.
 
 #### DEMO Video
 
+
+
+
+
+## ➤ Contributors
+[<img alt="HeeYoun Kim" src="https://avatars.githubusercontent.com/u/52766951?v=4" width="100">](https://github.com/miiunii) | [<img alt="YongWook Lee" src="https://avatars2.githubusercontent.com/u/46441280?s=460&v=4" width="100">](https://instagram.com/yongwookLee) | [<img alt="JeongMin Lee" src="https://avatars.githubusercontent.com/u/53992007?v=44" width="100">](https://github.com/hustle-dev) | [<img alt="Chaewon Jeong" src="https://avatars.githubusercontent.com/u/57611054?v=4" width="100">](https://github.com/chaewon1121) |
+|:-----:|:-----:|:-----:|:-----:|
+| [HeeYoun Kim](hhttps://github.com/miiunii) | [YongWook Lee](https://github.com/yongwookLee)  | [JeongMin Lee](https://instagram.com/hustle-dev)      | [Chaewon Jeong](https://github.com/chaewon1121)   | 
+| 🐹  | 🐻‍❄️  | 🐵    | 🐶  | 
+| Back-end Developer  | Front-end Developer  | Smart Contract Developer    | Product Manager  | 
 
 
 
