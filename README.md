@@ -17,9 +17,17 @@
 | Lee JeongMin 	| SmartContract Developer	|
 | Jeong Chaewon 	| Project Manager & AI Developer  |
 
-<h3>2.  Introduction </h3>
-“Uni navi ne committas omnia” is a Latin saying, ‘Don’t leave everything in one boat.’ <br>
-As such, we decided to make catchphrase in hopes of safely distributing risks through our platform. <br>
+<h3>2.  Inspiration  </h3>
+
+### Omnia is a ***blockchain-based p2p(peer-to-peer) insurance platform***. 
+
+Personally, we were dissatisfied with the chronic problems of the existing insurance industry.  
+For example, because of the issue of revenue structures, there were complaints about the inability of insurance to be generated for small needs, large amounts to be paid to cover risks, and complex contract procedures.  
+We had only vaguely thought of solving the problem, but through this opportunity, we were able to solve the problems one by one by designing and developing a p2p service that specifically introduced blockchain.
+
+#### Omnia's Vision
+“Uni navi ne committas omnia” is a Latin saying, ‘Don’t leave everything in one boat.’
+As such, we decided to make catchphrase in hopes of safely distributing risks through our platform.
 Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with a blockchain.
 
 <h3>3.  Service Features </h3>
