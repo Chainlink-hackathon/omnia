@@ -269,9 +269,10 @@ app.post('/api/create', async (req, res) => {
 
   const insuranceData = await insuranceContract.methods
     .insurancePayment()
-    .send()
+    .send({ from: '0x782F8853443AB778784DdF03D6835d7d068641F6' })
     .on('receipt', (receipt: any) => {
       console.log(receipt);
+      return receipt;
     });
 
   conn.query(
@@ -298,16 +299,12 @@ app.post('/api/myPage', async (req, res) => {
   const balance = await insuranceContract.methods
     .balance()
     .call()
-    .on('receipt', (receipt: any) => {
-      console.log(receipt);
-    });
+    .then(console.log);
 
   const contractBalance = await insuranceContract.methods
     .getInsruanceBalance()
     .call()
-    .on('receipt', (receipt: any) => {
-      console.log(receipt);
-    });
+    .on(console.log);
 
   conn.query(
     `SELECT * FROM insurance WHERE wallet_address=?`,
