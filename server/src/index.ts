@@ -10,8 +10,223 @@ import Web3 from 'web3';
 
 const web3 = new Web3('http://localhost:8545');
 const insuranceContract = new web3.eth.Contract(
-  [],
-  '0x01E293f1f1dFcF7619cB792B6624E9e1969156fA'
+  [
+    {
+      inputs: [],
+      stateMutability: 'payable',
+      type: 'constructor',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: 'bytes32',
+          name: 'id',
+          type: 'bytes32',
+        },
+      ],
+      name: 'ChainlinkCancelled',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: 'bytes32',
+          name: 'id',
+          type: 'bytes32',
+        },
+      ],
+      name: 'ChainlinkFulfilled',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: 'bytes32',
+          name: 'id',
+          type: 'bytes32',
+        },
+      ],
+      name: 'ChainlinkRequested',
+      type: 'event',
+    },
+    {
+      inputs: [],
+      name: 'depositTolending',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'divideInsurancePayment',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'bytes32',
+          name: '_requestId',
+          type: 'bytes32',
+        },
+        {
+          internalType: 'uint256',
+          name: '_volume',
+          type: 'uint256',
+        },
+      ],
+      name: 'fulfillAlarm',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'address',
+          name: 'targetClient',
+          type: 'address',
+        },
+      ],
+      name: 'giveRight',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'insurancePayment',
+      outputs: [],
+      stateMutability: 'payable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: 'durationInSeconds',
+          type: 'uint256',
+        },
+      ],
+      name: 'requestAlarmClock',
+      outputs: [
+        {
+          internalType: 'bytes32',
+          name: 'requestId',
+          type: 'bytes32',
+        },
+      ],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: 'amount',
+          type: 'uint256',
+        },
+      ],
+      name: 'withdraw',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'withdraw',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'withdrawFromlending',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'withdrawLINK',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'balance',
+      outputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'clstatus',
+      outputs: [
+        {
+          internalType: 'bool',
+          name: '',
+          type: 'bool',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'getInsruanceBalance',
+      outputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'payTarget',
+      outputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'size',
+      outputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+  ],
+  '0xE31485d46C678514889fEbb0b0D4c3B255404d32'
 );
 
 // Routing
@@ -52,7 +267,7 @@ app.post('/api/create', async (req, res) => {
   const dueDate = req.body.dueDate;
   const walletAddress = req.body.walletAddress;
 
-  await insuranceContract.methods
+  const insuranceData = await insuranceContract.methods
     .insurancePayment()
     .send()
     .on('receipt', (receipt: any) => {
@@ -67,7 +282,10 @@ app.post('/api/create', async (req, res) => {
         res.json({ code: 0 });
         throw err;
       } else {
-        res.json({ code: 1 });
+        res.json({
+          code: 1,
+          insuranceInfo: insuranceData,
+        });
       }
     }
   );
@@ -112,9 +330,10 @@ app.post('/api/myPage', async (req, res) => {
   );
 });
 
+// Get Ether back
 app.post('/api/withdraw', async (req, res) => {
   await insuranceContract.methods
-    .withdraw()
+    .withdraw(1)
     .send()
     .on('receipt', (receipt: any) => {
       console.log(receipt);
