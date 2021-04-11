@@ -147,14 +147,14 @@ Using React, express(nodejs framework), we made web server for communicating wit
 > 
 > - request -> user can purchase insurance with this request. It requires user's confirmation code, user's name, Insurance's end date
 > and user's wallet address.
-> ```json
+> ```js
 > // Request Body
 > {
 >    confirmationCode: String,
 >    name: String,
 >    dueDate: Date,
 >    walletAddress: String
->  }
+> }
 > ```
 > 
 > - DB Query -> Insert user's data into insurance table.
@@ -163,7 +163,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >```
 > 
 > - response -> If there is an error, response error or not response success code.
->```json
+>```js
 >// Success Response Body
 >{
 >   code: 1
@@ -178,7 +178,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 ***> 2. Get My Insurance Data ( '/api/myPage' )***
 > 
 > - request -> User can check he or she's insurance data with this request. It requires user's wallet address.
->```json
+>```js
 >// Request Body
 >{
 >   walletAddress: String
@@ -191,7 +191,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >```
 > 
 > - response -> If there is an error, response error or not response insurance data
->```json
+>```js
 >// Response Body
 >{
 >   confirmationCode: String,
