@@ -227,27 +227,27 @@ Using React, express(nodejs framework), we made web server for communicating wit
 > Clstatus -> First of all false
 > 
 > ```js
-constructor() public payable {
-        // require(msg.value == 1 ether, "1 ehter initial insurance funds required");
-        owner = msg.sender;
-        unit = 10**18;
-        // remain = 1;
-        setPublicChainlinkToken();
-        oracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
-        jobId = "982105d690504c5d9ce374d040c08654";
-        fee = 0.1 * 10 ** 18; // 0.1 LINK
-        clstatus = false;
-        weth = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
-        WETH = IWETH(weth);
-        ILendingPoolAddressesProvider provider = ILendingPoolAddressesProvider(lendingPoolAddressesProviderAddr);
-        pooladdr = provider.getLendingPool();
-        ILendingPool poolInstance = ILendingPool(pooladdr);
-        lendingPool = poolInstance;
-        aWETH = IAToken(poolInstance.getReserveData(weth).aTokenAddress);
-    }
+> constructor() public payable {
+>        // require(msg.value == 1 ether, "1 ehter initial insurance funds required");
+>        owner = msg.sender;
+>        unit = 10**18;
+>        // remain = 1;
+>        setPublicChainlinkToken();
+>        oracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
+>        jobId = "982105d690504c5d9ce374d040c08654";
+>        fee = 0.1 * 10 ** 18; // 0.1 LINK
+>        clstatus = false;
+>        weth = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+>        WETH = IWETH(weth);
+>        ILendingPoolAddressesProvider provider = ILendingPoolAddressesProvider(lendingPoolAddressesProviderAddr);
+>        pooladdr = provider.getLendingPool();
+>        ILendingPool poolInstance = ILendingPool(pooladdr);
+>        lendingPool = poolInstance;
+>        aWETH = IAToken(poolInstance.getReserveData(weth).aTokenAddress);
+>    }
 > ```
 > 
-> 5. **RequestAlarmClock,fulAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, thenreplaced the status value with true after the chainlink Oracle has run it all automatically.
+> 5. **RequestAlarmClock,fullfillAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, then replaced the status value with true after the chainlink Oracle has run it all automatically.
 >```js
 >function requestAlarmClock(uint256 durationInSeconds) public returns (bytes32 requestId) 
 >    {
@@ -257,35 +257,140 @@ constructor() public payable {
 >        return sendChainlinkRequestTo(oracle, request, fee);
 >    }
 >    
->    function fulfillAlarm(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
+>function fulfillAlarm(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
 >    {
 >        clstatus = true;
 >    } 
 >```
-> 6. ***DepositTolending(), withdrawFromlending()*** —>  functions that deposit and withdraw all the money in the contract into the lendingpool.
+> 6. ***authorizeLendingPool(), depositTolending(), withdrawFromlending(), _safeTransferETH*** —>  functions that deposit and withdraw all the money in the contract into the lendingpool.
 > 
+>```js
+> function authorizeLendingPool() public{
+>        require(owner == msg.sender);
+>        WETH.approve(pooladdr, uint256(-1));
+>    }
+>    
+> function depositTolending() public payable {
+>        require(owner == msg.sender);
+>        WETH.deposit{value: msg.value}();
+>        lendingPool.deposit(address(WETH), msg.value, msg.sender, 0);
+>    }
+>    
+> function withdrawFromlending() external {
+>        userBalance = aWETH.balanceOf(msg.sender);
+>        aWETH.transferFrom(msg.sender, address(this), userBalance);
+>        lendingPool.withdraw(address(WETH), userBalance, address(this));
+>        WETH.withdraw(userBalance);
+>        _safeTransferETH(msg.sender, userBalance);
+>    }
+>    
+> function _safeTransferETH(address to, uint256 value) internal {
+>        (bool success, ) = to.call{value: value}(new bytes(0));
+>        require(success, 'ETH_TRANSFER_FAILED');
+>    }
+>```
+>
 > 7. ***giveRight*** —>Contract Issuer makes the status of a particular client 1 If clstatus is true (i.e. the original goal was to get data from an external adapter when certified by the insurer and change the status corresponding to the person's address to 1, but after a certain period of time using alarm clock as an alternative, the contract issuer enters and executes the insured's address).
 > 
-> 8. ***withdraw()*** —> All balance withdrawals in the contract
+>```js
+>function giveRight(address targetClient) public {
+>        require(owner == msg.sender);
+>        if(clstatus == true)
+>        {
+>            clientInfo[targetClient].status = 1;
+>            clstatus = false;
+>        }
+>    }
+>```
+> 8. ***withdrawForadmin()*** —> All balance withdrawals in the contract
+> ```js
+>function withdrawForadmin() public {
+>        require(owner == msg.sender);
+>        owner.transfer(address(this).balance);
+>    }
+> ```
 > 
-> 9. ***withdraw(uintamount)*** —> a function that allows withdrawals and payments to be made only by those authorized to pay insurance.
+> 9. ***withdrawForclient(uint256 amount)*** —> a function that allows withdrawals and payments to be made only by those authorized to pay insurance.
 > 
-> 10. A function of handing out insurance money (to the uninsured)
+>```js
+>function withdrawForclient(uint256 amount) public {
+>        require(clientInfo[msg.sender].status == 1); // can withdraw when they have right to withdraw.
+>        require(address(this).balance >= amount);
+>        remain -= amount;
+>        amount = amount * unit;
+>        // clientInfo[msg.sender].balances -= amount;
+>        clientInfo[msg.sender].status = 0;
+>        numOfrecevied++;
+>        msg.sender.transfer(amount);
+>    } 
+>```
+> 10. ***divideInsurancePayment()*** —> Distribute insurance money to those who are not involved in the accident.
 >
-> 11. **insurancePayment()** —> a function that customers pay for insurance (1 ether default)
+>```js
+>function divideInsurancePayment() public {
+>        require(owner == msg.sender);
+>        moneyTohost = (remain*unit) + (address(this).balance * 5 / 100);
+>        owner.transfer(moneyTohost);
+>        numOfdistribute = keyList.length - numOfrecevied;
+>        dtbMoney = (address(this).balance / numOfdistribute);
+>        for (uint i = 0; i< keyList.length; i++)
+>        {
+>            if(clientInfo[keyList[i]].status == 0)
+>            {
+>                keyList[i].transfer(dtbMoney);
+>                clientInfo[keyList[i]].balances = 0;
+>            }
+>        }
+>     }
+>```
+>
+> 11. **insurancePayment()** —> a function that customers pay for insurance (0.1 ether default)
 > 
+>```js
+>function insurancePayment() public payable {
+>        require(msg.value == 0.1 ether, "0.1 ether cost per month!");
+>        clientInfo[msg.sender].balances += msg.value;
+>        keyList.push(msg.sender);
+>    }
+>```
 > 12. ***size()*** —> Shows the number of people insured
 > 
+>```js
+>function size() public view returns (uint) {
+>        return uint(keyList.length);
+>    }
+>```
+>
 > 13. ***Balance()*** —> Show how much insurance you put in
-> 
+>
+>```js 
+>function balance() public view returns (uint256) {
+>        return clientInfo[msg.sender].balances;
+>    }
+>```
 > 14. ***getInsuranceBalance()*** —> Shows the balance currently in this contract
 > 
+>```js
+>function getInsruanceBalance() public view returns (uint256) {
+>        return address(this).balance;
+>    }
+>```
 > 15. ***payTarget()*** —> You can check if you are eligible for insurance Payable Must not be 0 and must be 1 to be eligible for insurance payTarget()
 > 
-> 16. ***withdrawLINK()*** —> To perform a chainlink related function, you can send and use linktoken to this contract, which returns the remaining
-> linktoken.
-
-
+>```js
+>function payTarget() public view returns (uint256) {
+>        return clientInfo[msg.sender].status;
+>    }
+>```
+> 16. ***withdrawLINK()*** —> To use chainlink, contract has some LINK token and after the end, rest of LINK will be recalled 
+> 
+>```js
+>function withdrawLINK() external {
+>        require(owner == msg.sender);
+>        LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
+>        require(linkToken.transfer(msg.sender, linkToken.balanceOf(address(this))), "Unable to transfer");
+>    }
+>```
 
 
 ---
