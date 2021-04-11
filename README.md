@@ -64,7 +64,7 @@ In addition, in addition to the automatic upload function that Verifier automati
 
 <h3> 4. Service Architecture </h3>
 
-<img src="./markdown_img/SA!.png">
+<img src="./markdown_img/SAR.png">
 Approximately, we designed the architecture as follows: Since it is a development demonstration, Verifier is difficult to recruit in reality, so it will be recruited and shown in future projects. Development is being carried out based on that architecture, and more detailed development and architecture will be uploaded at the final announcement.
 <br>
 
