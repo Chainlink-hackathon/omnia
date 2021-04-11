@@ -8,7 +8,9 @@ import * as engines from 'consolidate';
 import * as mysql from 'mysql';
 import Web3 from 'web3';
 
-const web3 = new Web3('http://localhost:8545');
+const web3 = new Web3(
+  'https://kovan.infura.io/v3/abe6788b40e4426a94699ef6da5eaf11'
+);
 const insuranceContract = new web3.eth.Contract(
   [
     {
