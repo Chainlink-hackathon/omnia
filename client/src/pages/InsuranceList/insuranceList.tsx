@@ -1,8 +1,7 @@
 import React from "react";
 import Bg from "../../assets/Insurance_List.png";
 import Accommodation from "../../assets/AccommodationInsurance.png";
-interface State{
-}
+interface State {}
 
 export default class InsuranceList extends React.Component<State> {
   next() {
@@ -35,6 +34,16 @@ export default class InsuranceList extends React.Component<State> {
           alt="Accommodation"
           onClick={this.next.bind(this)}
         />
+        <div
+          className="Button"
+          style={{
+            position: "absolute",
+            left: "878px",
+            top: "1309px",
+          }}
+        >
+          SUGGEST
+        </div>
       </>
     );
   }

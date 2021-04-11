@@ -276,6 +276,7 @@ async function getAccount() {
       method: "eth_requestAccounts",
     })
     .then((result:any) => {
+      console.log(result);
       return result;
     });
   return accounts[0];
