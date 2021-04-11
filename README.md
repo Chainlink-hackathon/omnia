@@ -17,6 +17,9 @@
 | Lee JeongMin 	| SmartContract Developer	|
 | Jeong Chaewon 	| Project Manager & AI Developer  |
 
+---
+
+
 <h3>2.  Inspiration  </h3>
 
 ### Omnia is a ***blockchain-based p2p(peer-to-peer) insurance platform***. 
@@ -30,9 +33,14 @@ We had only vaguely thought of solving the problem, but through this opportunity
 As such, we decided to make catchphrase in hopes of safely distributing risks through our platform.
 Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with a blockchain.
 
+---
+
 <h3>3.  Service Features </h3>
 
 We serve as a platform for connecting small needs that individuals have. It recruits members from inside the platform, competes with insurance companies for insurance with the best benefits, and conducts negotiations to open insurance. Inform members of the results of the negotiations and guide members to sign up. At this time, the entire process from subscription to payment of screening was designed to introduce smart contract technology. <br>
+
+---
+
 <h4> Service Process </h4>
 <img src="./markdown_img/Process.png">
 <br>
