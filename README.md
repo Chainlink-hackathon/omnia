@@ -8,7 +8,6 @@
 
 [![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
-<br>
 <h3>1.  Member </h3>
 
 | Name   	| Role                         	|
