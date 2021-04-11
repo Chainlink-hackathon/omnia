@@ -65,7 +65,15 @@ In addition, in addition to the automatic upload function that Verifier automati
 <h3> 4. Service Architecture </h3>
 
 <img src="./markdown_img/SA!.png">
-Approximately, we designed the architecture as follows: Since it is a development demonstration, Verifier is difficult to recruit in reality, so it will be recruited and shown in future projects. Development is being carried out based on that architecture, and more detailed development and architecture will be uploaded at the final announcement.
+The following is our servie architecture.
+
+Our platform introduced blockchain technology throughout the entire process of insurance contracts, such as purchasing insurance, receiving insurance premiums, and screening. Users check and purchase insurance. Direct variables of Contract such as "Insurance Fee Amount & Inflow, Outflow" are recorded on the Ethereum network as on-chain smart contracts. The metamask was then linked to web3.js. General data is written to storage(MySQL).
+
+The concept of Verifier emerges in the process of screening before users receive insurance money. Since it is a demonstration, it is not possible to recruit verifiers realistically, so it was assumed and set up when the business was expanded. At this point, Verifier can be considered to be a person who can officially verify examination documents in the course of contracts such as hospitals and courts. When a user is verified by an external party called verifier, this content is delivered to the nodes directly configured through chainlink api, which is sent back to the on-chain contact. In addition, we plan to link external adapters to prevent Oracle problems.
+
+Omnia operated a web server and also linked AAVE Protocol to utilize defi. AAVE is a coin lending platform for obtaining interest on deposits and borrowing assets. Although the deposit rate varies for each coin, the annual apy is about 5.91% based on DAI. Therefore, we have formed a system that earns profits through interest through the deposit of DAI, a stable coin, and returns some of its profits to customers who have not had an accident.
+
+To be specific, transfer the ether sent to the metamask to the AAVE Reserve Lending Pool. The transferred ether can be stored in the AAVE Wallet and converts the ETH into DAI through the built-in SWAP functionality of the AAVE platform. The DAI is deposited in the AAVE Staking Pool, and the revenue generated at this time is stored in the AAVE Wallet and transferred to the Metamask Wallet. For liquidity, it was developed that all amounts transferred to the Omnia platform could be automatically deposited into Pool at a set rate, rather than staking.
 <br>
 
 ---
