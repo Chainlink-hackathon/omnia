@@ -37,7 +37,7 @@ function Router({ location }: RouteComponentProps<MatchParams>) {
           <Route
               path="/about-project"
               component={() => {
-                window.location.href = "https://www.youtube.com/channel/UC9d9qkh7a8GI03utOPHBwDg";
+                window.location.href = "https://youtu.be/W5YVbma8Xwo";
                 return null;
               }}
             />
