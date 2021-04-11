@@ -4,11 +4,9 @@ pragma experimental ABIEncoderV2;
 
 import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
 import "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/interfaces/ILendingPool.sol";
-// import "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/interfaces/ILendingPoolAddressesProvider.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {IWETHGateway} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/misc/interfaces/IWETHGateway.sol";
 import {IWETH} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/misc/interfaces/IWETH.sol";
 import {IAToken} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/interfaces/IAToken.sol";
+// import {IWETHGateway} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/misc/interfaces/IWETHGateway.sol";
 
 contract Insurance is ChainlinkClient{
     address payable owner;
@@ -19,6 +17,9 @@ contract Insurance is ChainlinkClient{
     uint256 dtbMoney;
     uint256 moneyTohost;
     address constant lendingPoolAddressesProviderAddr = 0x88757f2f99175387aB4C6a4b3067c77A695b0349;
+    uint256 public userBalance;
+    address pooladdr;
+    address weth;
     
     bool public clstatus;
     address private oracle;
@@ -26,8 +27,9 @@ contract Insurance is ChainlinkClient{
     uint256 private fee;
     
     IWETH internal immutable WETH;
+    ILendingPool internal lendingPool;
+    IAToken internal aWETH;
 
-    
     struct Client{
         uint status; // not tartget = 0, target = 1
         uint balances; // balances, indexed by address
@@ -46,12 +48,17 @@ contract Insurance is ChainlinkClient{
         jobId = "982105d690504c5d9ce374d040c08654";
         fee = 0.1 * 10 ** 18; // 0.1 LINK
         clstatus = false;
-        WETH = IWETH(0xd0A1E359811322d97991E03f863a0C30C2cF029C);
+        weth = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+        WETH = IWETH(weth);
+        ILendingPoolAddressesProvider provider = ILendingPoolAddressesProvider(lendingPoolAddressesProviderAddr);
+        pooladdr = provider.getLendingPool();
+        ILendingPool poolInstance = ILendingPool(pooladdr);
+        lendingPool = poolInstance;
+        aWETH = IAToken(poolInstance.getReserveData(weth).aTokenAddress);
     }
     
     
     /* chainlink alaram clock */
-    
     function requestAlarmClock(uint256 durationInSeconds) public returns (bytes32 requestId) 
     {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillAlarm.selector);
@@ -65,13 +72,9 @@ contract Insurance is ChainlinkClient{
         clstatus = true;
     }
     
+    
     /* aave protocol */
-    
-    ILendingPoolAddressesProvider provider = ILendingPoolAddressesProvider(lendingPoolAddressesProviderAddr);
-    address pooladdr = provider.getLendingPool();
-    ILendingPool lendingPool = ILendingPool(pooladdr);
-    
-    address asset = 0xd0A1E359811322d97991E03f863a0C30C2cF029C; // weth eth
+    // address asset = 0xd0A1E359811322d97991E03f863a0C30C2cF029C; // weth eth
     
     function authorizeLendingPool() public{
         require(owner == msg.sender);
@@ -81,20 +84,15 @@ contract Insurance is ChainlinkClient{
     function depositTolending() public payable {
         require(owner == msg.sender);
         WETH.deposit{value: msg.value}();
-        lendingPool.deposit(asset, msg.value, msg.sender, 0);
+        lendingPool.deposit(address(WETH), msg.value, msg.sender, 0);
     }
     
-    function withdrawFromlending() public {
-        require(owner == msg.sender);
-        IAToken aWETH = IAToken(lendingPool.getReserveData(address(WETH)).aTokenAddress);
-        uint256 userBalance = aWETH.balanceOf(msg.sender);
-        uint256 amountToWithdraw = userBalance;
-        
-        aWETH.transferFrom(msg.sender, address(this), amountToWithdraw);
-        lendingPool.withdraw(asset, amountToWithdraw, address(this));
-        WETH.withdraw(amountToWithdraw);
-        _safeTransferETH(address(this), amountToWithdraw);
-        
+    function withdrawFromlending() external {
+        userBalance = aWETH.balanceOf(msg.sender);
+        aWETH.transferFrom(msg.sender, address(this), userBalance);
+        lendingPool.withdraw(address(WETH), userBalance, address(this));
+        WETH.withdraw(userBalance);
+        _safeTransferETH(msg.sender, userBalance);
     }
     
     function _safeTransferETH(address to, uint256 value) internal {
@@ -115,13 +113,13 @@ contract Insurance is ChainlinkClient{
     }
     
     
-    function withdraw() public {
+    function withdrawForadmin() public {
         require(owner == msg.sender);
         owner.transfer(address(this).balance);
     }
     
     
-    function withdraw(uint256 amount) public {
+    function withdrawForclient(uint256 amount) public {
         require(clientInfo[msg.sender].status == 1); // can withdraw when they have right to withdraw.
         require(address(this).balance >= amount);
         remain -= amount;
@@ -150,7 +148,7 @@ contract Insurance is ChainlinkClient{
      }
      
     function insurancePayment() public payable {
-        require(msg.value == 1 ether, "1 ether cost per month!");
+        require(msg.value == 0.1 ether, "0.1 ether cost per month!");
         clientInfo[msg.sender].balances += msg.value;
         keyList.push(msg.sender);
     }
