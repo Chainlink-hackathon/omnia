@@ -204,19 +204,53 @@ Using React, express(nodejs framework), we made web server for communicating wit
 
 > 1. ***Client structure***: Depending on the state and the amount of money deposited by the person, 0 means no insurance payment and 1 means no
 > insurance payment.
-> 
+> ```js
+> struct Client {
+>        uint status; // not tartget = 0, target = 1
+>        uint balances; // balances, indexed by address
+> }
+> ```
 > 2. ***ClientInfo Mapping*** : Created to map with address => client structure format and address as key KeyList Address Array: To store
 > the addresses of the people who have deposited and to count the total
 > number of people later on. Mappings are not Iterative, so counting is
 > inconvenient.
-> 
+> ```js
+> mapping(address=>Client) private clientInfo;
+> address payable[]  keyList;
+> ```
 > 3. The things in the constructor() **1** Ether must be initially deposited by the issuer to issue the contract.
-> 
+>
 > 4. using **setPublicChainlinkToken()** -> using chainlink token Oracle -> External Adapter Oracle Address I Use JobId -> External Adapter id
 > Clstatus -> First of all false
 > 
-> 5. **RequestAlarmClock,fulAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, thenreplaced the status value with true after the chainlink Oracle has run it all automatically.
+> ```js
+>  constructor() public payable {
+>        owner = msg.sender;
+>        unit = 10**18;
+>        setPublicChainlinkToken();
+>        oracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
+>        jobId = "982105d690504c5d9ce374d040c08654";
+>        fee = 0.1 * 10 ** 18; // 0.1 LINK
+>        clstatus = false;
+>        WETH = IWETH(0xd0A1E359811322d97991E03f863a0C30C2cF029C);
+>  }
+> ```
 > 
+> 5. **RequestAlarmClock,fulAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, thenreplaced the status value with true after the chainlink Oracle has run it all automatically.
+>```js
+>function requestAlarmClock(uint256 durationInSeconds) public returns (bytes32 requestId) 
+>    {
+>        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillAlarm.selector);
+>        // This will return in 90 seconds
+>        request.addUint("until", block.timestamp + durationInSeconds);
+>        return sendChainlinkRequestTo(oracle, request, fee);
+>    }
+>    
+>    function fulfillAlarm(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
+>    {
+>        clstatus = true;
+>    } 
+>```
 > 6. ***DepositTolending(), withdrawFromlending()*** —>  functions that deposit and withdraw all the money in the contract into the lendingpool.
 > 
 > 7. ***giveRight*** —>Contract Issuer makes the status of a particular client 1 If clstatus is true (i.e. the original goal was to get data from an external adapter when certified by the insurer and change the status corresponding to the person's address to 1, but after a certain period of time using alarm clock as an alternative, the contract issuer enters and executes the insured's address).
