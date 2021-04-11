@@ -49,6 +49,10 @@ app.use(express_1.default.static(path_1.default.join(__dirname, '../../client/bu
 app.engine('html', engines.mustache);
 app.set('views', path_1.default.join(__dirname, '../../client/build'));
 app.set('view engine', 'html');
+// Web3 Test
+// app.use(express.static(path.join(__dirname, '../src/public')));
+// app.set('views', path.join(__dirname, '../src/views'));
+// app.set('view engine', 'ejs');
 app.use(cors_1.default());
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
@@ -76,7 +80,9 @@ app.post('/api/create', (req, res) => __awaiter(void 0, void 0, void 0, function
             throw err;
         }
         else {
-            res.json({ code: 1 });
+            res.json({
+                code: 1,
+            });
         }
     });
 }));
