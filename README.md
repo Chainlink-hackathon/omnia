@@ -213,7 +213,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 > 2. ***ClientInfo Mapping*** : Created to map with address => client structure format and address as key KeyList Address Array: To store
 > the addresses of the people who have deposited and to count the total
 > number of people later on. Mappings are not Iterative, so counting is
-> inconvenient.
+> inconvenient because of this, I make this array.
 > ```js
 > mapping(address=>Client) private clientInfo;
 > address payable[]  keyList;
@@ -224,16 +224,24 @@ Using React, express(nodejs framework), we made web server for communicating wit
 > Clstatus -> First of all false
 > 
 > ```js
->  constructor() public payable {
->        owner = msg.sender;
->        unit = 10**18;
->        setPublicChainlinkToken();
->        oracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
->        jobId = "982105d690504c5d9ce374d040c08654";
->        fee = 0.1 * 10 ** 18; // 0.1 LINK
->        clstatus = false;
->        WETH = IWETH(0xd0A1E359811322d97991E03f863a0C30C2cF029C);
->  }
+constructor() public payable {
+        // require(msg.value == 1 ether, "1 ehter initial insurance funds required");
+        owner = msg.sender;
+        unit = 10**18;
+        // remain = 1;
+        setPublicChainlinkToken();
+        oracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
+        jobId = "982105d690504c5d9ce374d040c08654";
+        fee = 0.1 * 10 ** 18; // 0.1 LINK
+        clstatus = false;
+        weth = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+        WETH = IWETH(weth);
+        ILendingPoolAddressesProvider provider = ILendingPoolAddressesProvider(lendingPoolAddressesProviderAddr);
+        pooladdr = provider.getLendingPool();
+        ILendingPool poolInstance = ILendingPool(pooladdr);
+        lendingPool = poolInstance;
+        aWETH = IAToken(poolInstance.getReserveData(weth).aTokenAddress);
+    }
 > ```
 > 
 > 5. **RequestAlarmClock,fulAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, thenreplaced the status value with true after the chainlink Oracle has run it all automatically.
