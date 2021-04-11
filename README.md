@@ -1,6 +1,6 @@
 # Chainlink Virtual Hackathon Spring 2021
 ## Omnia: Blockchain-based P2P Insurance Platform
-
+https://chainlink-omnia.herokuapp.com/
 
 
 <p align="center"><img src="./markdown_img/Omia_real.png"></p>
@@ -79,7 +79,7 @@ Approximately, we designed the architecture as follows: Since it is a developmen
 <h3> 6. Develop Process </h3>
 
 
-Using React, express(nodejs framework), we made web server for communicating with client. React for client screen, express for backend server and truffle for smartcontract deploy. Also we made smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. Also, we made database for managing user's data using MySQL and connected AAVE API for defi staking. 
+Using React, express(nodejs framework), we made web server for communicating with client. React for client screen, express for backend server and remix IDE for smartcontract deploy. Also we made smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. Also, we made database for managing user's data using MySQL and connected AAVE API for defi staking. 
 
 ###  Languages and Frameworks & version 
 
