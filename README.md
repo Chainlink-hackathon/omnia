@@ -33,7 +33,7 @@ We had only vaguely thought of solving the problem, but through this opportunity
 As such, we decided to make catchphrase in hopes of safely distributing risks through our platform.
 Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with blockchain.
 
----
+
 
 <h3>3.  Service Features </h3>
 
@@ -123,10 +123,80 @@ Using React, express(nodejs framework), we made web server for communicating wit
 
 
 ---
+### Details
+#### a. Front-end
+#### b. Back-end
 
-<h3> Contract </h3>
-<img src="./markdown_img/request_model.png">
-Through the chainlink external adapter, we will get approved insurance data from oracle Node. When chainlink client request an information, oracle contract request to oracle node and oracle node give requested information using json as you can see above. Using that json, smartcontract will be operated and it will give insurance payment if it corresponds to a written code.
+**< Overview >**
+
+    
+
+> Server made with Express js (Node js), Typescript and MySQL. Server deployed with Heroku 
+(Cloud Application Platform)
+
+**< API >**
+
+***> 1. Purchase Insurance ( '/api/create' )***
+> 
+> - request -> user can purchase insurance with this request. It requires user's confirmation code, user's name, Insurance's end date
+> and user's wallet address.
+> 
+> - DB Query -> Insert user's data into insurance table.
+> 
+> - response -> If there is an error, response error or not response success code.
+> 
+***> 2. Get My Insurance Data ( '/api/myPage' )***
+> 
+> - request -> User can check he or she's insurance data with this request. It requires user's wallet address.
+> 
+> - DB Query -> SELECT insurance data which user purchased from insurance table.
+> 
+> - response -> If there is an error, response error or not response insurance data
+
+#### c. Smart Contract
+
+> 1. ***Client structure***: Depending on the state and the amount of money deposited by the person, 0 means no insurance payment and 1 means no
+> insurance payment.
+> 
+> 2. ***ClientInfo Mapping*** : Created to map with address => client structure format and address as key KeyList Address Array: To store
+> the addresses of the people who have deposited and to count the total
+> number of people later on. Mappings are not Iterative, so counting is
+> inconvenient.
+> 
+> 3. The things in the constructor() **1** Ether must be initially deposited by the issuer to issue the contract.
+> 
+> 4. using **setPublicChainlinkToken()** -> using chainlink token Oracle -> External Adapter Oracle Address I Use JobId -> External Adapter id
+> Clstatus -> First of all false
+> 
+> 5. **RequestAlarmClock,fulAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, thenreplaced the status value with true after the chainlink Oracle has run it all automatically.
+> 
+> 6. ***DepositTolending(), withdrawFromlending()*** —>  functions that deposit and withdraw all the money in the contract into the lendingpool.
+> 
+> 7. ***giveRight*** —>Contract Issuer makes the status of a particular client 1 If clstatus is true (i.e. the original goal was to get data from an external adapter when certified by the insurer and change the status corresponding to the person's address to 1, but after a certain period of time using alarm clock as an alternative, the contract issuer enters and executes the insured's address).
+> 
+> 8. ***withdraw()*** —> All balance withdrawals in the contract
+> 
+> 9. ***withdraw(uintamount)*** —> a function that allows withdrawals and payments to be made only by those authorized to pay insurance.
+> 
+> 10. A function of handing out insurance money (to the uninsured)
+>
+> 11. **insurancePayment()** —> a function that customers pay for insurance (1 ether default)
+> 
+> 12. ***size()*** —> Shows the number of people insured
+> 
+> 13. ***Balance()*** —> Show how much insurance you put in
+> 
+> 14. ***getInsuranceBalance()*** —> Shows the balance currently in this contract
+> 
+> 15. ***payTarget()*** —> You can check if you are eligible for insurance Payable Must not be 0 and must be 1 to be eligible for insurance payTarget()
+> 
+> 16. ***withdrawLINK()*** —> To perform a chainlink related function, you can send and use linktoken to this contract, which returns the remaining
+> linktoken.
+
+
+
+
+---
 
 <h3>6.  Benefits </h3>
 
