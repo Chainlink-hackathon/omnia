@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: agpl-3.0
 pragma solidity ^0.6.12;
 pragma experimental ABIEncoderV2;
 
@@ -5,6 +6,9 @@ import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
 import "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/interfaces/ILendingPool.sol";
 // import "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/interfaces/ILendingPoolAddressesProvider.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {IWETHGateway} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/misc/interfaces/IWETHGateway.sol";
+import {IWETH} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/misc/interfaces/IWETH.sol";
+import {IAToken} from "https://github.com/aave/protocol-v2/blob/ice/mainnet-deployment-03-12-2020/contracts/interfaces/IAToken.sol";
 
 contract Insurance is ChainlinkClient{
     address payable owner;
@@ -14,12 +18,14 @@ contract Insurance is ChainlinkClient{
     uint256 numOfdistribute;
     uint256 dtbMoney;
     uint256 moneyTohost;
+    address constant lendingPoolAddressesProviderAddr = 0x88757f2f99175387aB4C6a4b3067c77A695b0349;
     
-
     bool public clstatus;
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;
+    
+    IWETH internal immutable WETH;
 
     
     struct Client{
@@ -31,15 +37,16 @@ contract Insurance is ChainlinkClient{
     address payable[]  keyList;
     
     constructor() public payable {
-        require(msg.value == 1 ether, "1 ehter initial insurance funds required");
+        // require(msg.value == 1 ether, "1 ehter initial insurance funds required");
         owner = msg.sender;
         unit = 10**18;
-        remain = 10;
+        // remain = 1;
         setPublicChainlinkToken();
         oracle = 0xAA1DC356dc4B18f30C347798FD5379F3D77ABC5b;
         jobId = "982105d690504c5d9ce374d040c08654";
         fee = 0.1 * 10 ** 18; // 0.1 LINK
         clstatus = false;
+        WETH = IWETH(0xd0A1E359811322d97991E03f863a0C30C2cF029C);
     }
     
     
@@ -60,18 +67,39 @@ contract Insurance is ChainlinkClient{
     
     /* aave protocol */
     
-    address asset = 0xae48F1e85514B1873D23C69744C238612079A185; // kovan eth
-    ILendingPool lendingPool = ILendingPool(0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe);
-    function depositTolending() public {
+    ILendingPoolAddressesProvider provider = ILendingPoolAddressesProvider(lendingPoolAddressesProviderAddr);
+    address pooladdr = provider.getLendingPool();
+    ILendingPool lendingPool = ILendingPool(pooladdr);
+    
+    address asset = 0xd0A1E359811322d97991E03f863a0C30C2cF029C; // weth eth
+    
+    function authorizeLendingPool() public{
         require(owner == msg.sender);
-        IERC20(asset).approve(address(lendingPool), 1*unit);
-        lendingPool.deposit(asset, 1*unit, address(this), 0);
+        WETH.approve(pooladdr, uint256(-1));
     }
     
+    function depositTolending() public payable {
+        require(owner == msg.sender);
+        WETH.deposit{value: msg.value}();
+        lendingPool.deposit(asset, msg.value, msg.sender, 0);
+    }
     
     function withdrawFromlending() public {
         require(owner == msg.sender);
-        lendingPool.withdraw(asset, type(uint).max, address(this));
+        IAToken aWETH = IAToken(lendingPool.getReserveData(address(WETH)).aTokenAddress);
+        uint256 userBalance = aWETH.balanceOf(msg.sender);
+        uint256 amountToWithdraw = userBalance;
+        
+        aWETH.transferFrom(msg.sender, address(this), amountToWithdraw);
+        lendingPool.withdraw(asset, amountToWithdraw, address(this));
+        WETH.withdraw(amountToWithdraw);
+        _safeTransferETH(address(this), amountToWithdraw);
+        
+    }
+    
+    function _safeTransferETH(address to, uint256 value) internal {
+        (bool success, ) = to.call{value: value}(new bytes(0));
+        require(success, 'ETH_TRANSFER_FAILED');
     }
     
     
