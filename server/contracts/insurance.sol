@@ -84,17 +84,28 @@ contract Insurance is ChainlinkClient{
         lendingPool.deposit(asset, msg.value, msg.sender, 0);
     }
     
+    uint256 public userBalance;
+    function checkIAT() public {
+        IAToken aWETH = IAToken(lendingPool.getReserveData(address(WETH)).aTokenAddress);
+        userBalance = aWETH.balanceOf(msg.sender);
+    }
+    
+    function Checkfunc() public {
+        IAToken aWETH = IAToken(lendingPool.getReserveData(address(WETH)).aTokenAddress);
+        userBalance = aWETH.balanceOf(msg.sender);
+        aWETH.transferFrom(msg.sender, address(this), userBalance);
+    }
+    
     function withdrawFromlending() public {
         require(owner == msg.sender);
         IAToken aWETH = IAToken(lendingPool.getReserveData(address(WETH)).aTokenAddress);
-        uint256 userBalance = aWETH.balanceOf(msg.sender);
-        uint256 amountToWithdraw = userBalance;
+        userBalance = aWETH.balanceOf(msg.sender);
         
-        aWETH.transferFrom(msg.sender, address(this), amountToWithdraw);
-        lendingPool.withdraw(asset, amountToWithdraw, address(this));
-        WETH.withdraw(amountToWithdraw);
-        _safeTransferETH(address(this), amountToWithdraw);
-        
+        aWETH.transferFrom(msg.sender, address(this), userBalance);
+        lendingPool.withdraw(address(WETH), userBalance, address(this));
+        WETH.withdraw(userBalance);
+        _safeTransferETH(address(this), userBalance);
+
     }
     
     function _safeTransferETH(address to, uint256 value) internal {
@@ -115,13 +126,13 @@ contract Insurance is ChainlinkClient{
     }
     
     
-    function withdraw() public {
+    function withdrawForadmin() public {
         require(owner == msg.sender);
         owner.transfer(address(this).balance);
     }
     
     
-    function withdraw(uint256 amount) public {
+    function withdrawForclient(uint256 amount) public {
         require(clientInfo[msg.sender].status == 1); // can withdraw when they have right to withdraw.
         require(address(this).balance >= amount);
         remain -= amount;
@@ -150,7 +161,7 @@ contract Insurance is ChainlinkClient{
      }
      
     function insurancePayment() public payable {
-        require(msg.value == 1 ether, "1 ether cost per month!");
+        require(msg.value == 0.1 ether, "0.1 ether cost per month!");
         clientInfo[msg.sender].balances += msg.value;
         keyList.push(msg.sender);
     }
