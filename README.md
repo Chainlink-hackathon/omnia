@@ -368,21 +368,21 @@ Using React, express(nodejs framework), we made web server for communicating wit
 > 14. ***getInsuranceBalance()*** —> Shows the balance currently in this contract
 > 
 >```js
->    function getInsruanceBalance() public view returns (uint256) {
+>function getInsruanceBalance() public view returns (uint256) {
 >        return address(this).balance;
 >    }
 >```
 > 15. ***payTarget()*** —> You can check if you are eligible for insurance Payable Must not be 0 and must be 1 to be eligible for insurance payTarget()
 > 
 >```js
->    function payTarget() public view returns (uint256) {
+>function payTarget() public view returns (uint256) {
 >        return clientInfo[msg.sender].status;
 >    }
 >```
 > 16. ***withdrawLINK()*** —> To use chainlink, contract has some LINK token and after the end, rest of LINK will be recalled 
 > 
 >```js
->    function withdrawLINK() external {
+>function withdrawLINK() external {
 >        require(owner == msg.sender);
 >        LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
 >        require(linkToken.transfer(msg.sender, linkToken.balanceOf(address(this))), "Unable to transfer");
