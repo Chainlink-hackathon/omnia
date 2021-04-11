@@ -285,8 +285,8 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >        (bool success, ) = to.call{value: value}(new bytes(0));
 >        require(success, 'ETH_TRANSFER_FAILED');
 >    }
-```
-
+>```
+>
 > 7. ***giveRight*** —>Contract Issuer makes the status of a particular client 1 If clstatus is true (i.e. the original goal was to get data from an external adapter when certified by the insurer and change the status corresponding to the person's address to 1, but after a certain period of time using alarm clock as an alternative, the contract issuer enters and executes the insured's address).
 > 
 >```js
