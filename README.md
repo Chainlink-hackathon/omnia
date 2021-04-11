@@ -64,7 +64,7 @@ In addition, in addition to the automatic upload function that Verifier automati
 
 <h3> 4. Service Architecture </h3>
 
-<img src="./markdown_img/Service_Architecture.png">
+<img src="./markdown_img/SA!.png">
 Approximately, we designed the architecture as follows: Since it is a development demonstration, Verifier is difficult to recruit in reality, so it will be recruited and shown in future projects. Development is being carried out based on that architecture, and more detailed development and architecture will be uploaded at the final announcement.
 <br>
 
@@ -78,7 +78,6 @@ Approximately, we designed the architecture as follows: Since it is a developmen
 
 <h3> 6. Develop Process </h3>
 
-<img src="./markdown_img/Develop_process.png">
 
 Using React, express(nodejs framework), we made web server for communicating with client. React for client screen, express for backend server and truffle for smartcontract deploy. Also we made smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. Also, we made database for managing user's data using MySQL and connected AAVE API for defi staking. 
 
