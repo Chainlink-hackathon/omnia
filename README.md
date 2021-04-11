@@ -12,10 +12,10 @@
 
 | Name   	| Role                         	|
 |--------	|-------------------------------	|
-| Kim HeeYoun  	| Back-end Developer |
-| Lee YongWook 	| Front-end Developer |
-| Lee JeongMin 	| SmartContract Developer	|
-| Jeong Chaewon 	| Project Manager |
+| HeeYoun Kim  	| Back-end Developer |
+| YongWook Lee  	| Front-end Developer |
+| JeongMin Lee	| SmartContract Developer	|
+| Chaewon Jeong 	| Project Manager |
 
 ---
 
