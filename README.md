@@ -5,7 +5,7 @@
 
 <p align="center"><img src="./markdown_img/Omia_real.png"></p>
 
-d
+
 
 <br>
 <h3>1.  Member </h3>
@@ -64,7 +64,7 @@ In addition, in addition to the automatic upload function that Verifier automati
 
 <h3> 4. Service Architecture </h3>
 
-<img src="./markdown_img/SA.png">
+<img src="./markdown_img/SA!.png">
 Approximately, we designed the architecture as follows: Since it is a development demonstration, Verifier is difficult to recruit in reality, so it will be recruited and shown in future projects. Development is being carried out based on that architecture, and more detailed development and architecture will be uploaded at the final announcement.
 <br>
 
@@ -244,7 +244,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >    }
 > ```
 > 
-> 5. **RequestAlarmClock,fulAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, thenreplaced the status value with true after the chainlink Oracle has run it all automatically.
+> 5. **RequestAlarmClock,fullfillAlarm** —> supplied by the chainlink external adapter, and entered a few seconds in the requestalarmclock, then replaced the status value with true after the chainlink Oracle has run it all automatically.
 >```js
 >function requestAlarmClock(uint256 durationInSeconds) public returns (bytes32 requestId) 
 >    {
@@ -254,13 +254,39 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >        return sendChainlinkRequestTo(oracle, request, fee);
 >    }
 >    
->    function fulfillAlarm(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
+>function fulfillAlarm(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
 >    {
 >        clstatus = true;
 >    } 
 >```
-> 6. ***DepositTolending(), withdrawFromlending()*** —>  functions that deposit and withdraw all the money in the contract into the lendingpool.
+> 6. ***authorizeLendingPool(), depositTolending(), withdrawFromlending(), _safeTransferETH*** —>  functions that deposit and withdraw all the money in the contract into the lendingpool.
 > 
+>```js
+> function authorizeLendingPool() public{
+>        require(owner == msg.sender);
+>        WETH.approve(pooladdr, uint256(-1));
+>    }
+>    
+> function depositTolending() public payable {
+>        require(owner == msg.sender);
+>        WETH.deposit{value: msg.value}();
+>        lendingPool.deposit(address(WETH), msg.value, msg.sender, 0);
+>    }
+>    
+> function withdrawFromlending() external {
+>        userBalance = aWETH.balanceOf(msg.sender);
+>        aWETH.transferFrom(msg.sender, address(this), userBalance);
+>        lendingPool.withdraw(address(WETH), userBalance, address(this));
+>        WETH.withdraw(userBalance);
+>        _safeTransferETH(msg.sender, userBalance);
+>    }
+>    
+> function _safeTransferETH(address to, uint256 value) internal {
+>        (bool success, ) = to.call{value: value}(new bytes(0));
+>        require(success, 'ETH_TRANSFER_FAILED');
+>    }
+```
+
 > 7. ***giveRight*** —>Contract Issuer makes the status of a particular client 1 If clstatus is true (i.e. the original goal was to get data from an external adapter when certified by the insurer and change the status corresponding to the person's address to 1, but after a certain period of time using alarm clock as an alternative, the contract issuer enters and executes the insured's address).
 > 
 > 8. ***withdraw()*** —> All balance withdrawals in the contract
