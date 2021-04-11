@@ -77,14 +77,8 @@ To be specific, transfer the ether sent to the metamask to the AAVE Reserve Lend
 <br>
 
 ---
-<h3>5.  Expected Benefits </h3>
 
-#### Ensured Revenue Model
-
-#### Scability & Flexibility
-
-
-<h3> 6. Develop Process </h3>
+<h3> 5. Develop Process </h3>
 
 <img src="./markdown_img/develop_stack.png">
 Using React, express(nodejs framework), we made web server for communicating with client. React for client screen, express for backend server and remix IDE for smartcontract deploy. Also we made smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. Also, we made database for managing user's data using MySQL and connected AAVE API for defi staking. 
@@ -402,6 +396,58 @@ Using React, express(nodejs framework), we made web server for communicating wit
 
 
 ---
+
+<h3> 6.What's next for Omnia </h3>
+---
+If the competitive edge is verified through this competition, it will start a business so that it can become a real service.
+
+We think it is important to recruit customers because of our item characteristics(*p2p platform*). This is because the types of insurance generated within the platform will vary only when customers gather, and we think this will soon create a virtuous cycle that brings in another customer.
+
+Therefore, we want to bring together many customers and create network effects by gradually introducing 'management strategies' and 'technology strategies' in order to prosper the platform.
+
+### Our management goal
+<img alt = "logo" src="https://github.com/Chainlink-hackathon/omnia/blob/main/markdown_img/swot.png?raw=true">
+
+Through SWOT analysis, we selected management strategies that should be adopted when commercializing Omnia services based on priorities. When analyzed by the analysis tool, Omnia's OS strategy was appropriate. 
+There are two main strategies recommended in the OS strategy. 
+There are Market Opportunity Preoccupation Strategy,
+Product and Market Diversification Strategy.
+
+Then We divided the strategies to proceed step by step like below lists.
+
+> Phase 1. Leaping as the first mover in the blockchain-based P2P insurance platform sector 
+> by pre-entering related markets 
+> 
+> Phase2. Products, Market Diversification 
+> 
+> Phase 3. Strategic Alliance Partner Recruitment 
+> -> Increase accessibility by embedding in unicorn platform services
+
+---
+
+### Our technical goal
+We will fully link services that have been invested and have not been linked because of lack of funds. We will link paid domains, servers, and api, which were not technically implemented and interlocked only, using cloud services. Furthermore, we will continue to refactory the code and strive to create clean code.
+In addition, we currently plan to introduce DID technology to the identity certification stage when the platform stabilizes to enhance convenience. We will continue to add customer-friendly services like this.
+
+---
+
+### Our Final goal  
+First of all, we want to solve chronic problems that have occurred in the existing insurance industry by achieving prosperity of the platform. Especially young age groups, such as the MZ generation, are reluctant to insure at a cost, and we design insurance to be reasonable and short-term, and try to connect even the slightest risk to each peer. Through this, we want to make a leap forward into a stable society where money can share at least a little risk.
+
+In addition, we want to overcome the negative perception of the blockchain industry and solve the challenges of scalability that the industry has. For general users, blockchain is more known as cryptocurrency than the value of technology, and there are still many negative perceptions that it is a means of speculation. In addition, the word trilemma is used in the blockchain industry(scability, decentralization,security), and among the three values, there are still fewer practical services that are highly scalable. 
+we think this challenge of scalability can be solved by creating attractive customer-friendly services and expanding the number of users. Therefore, we tried to design it without significant difference from the UX experienced by ordinary users when using existing general sites. The technical difficulties were turned over to the back-end as much as possible, and the client interface was designed intuitively. 
+
+In the same context, additional features such as OCR and STT (voice recognition) are designed. we want to gather many users by providing the best UX from the perspective of consumers as much as much as possible. Through this, "Omnia" wants to be a precedent for solving the challenges of scalability and driving the revitalization of the blockchain industry. This is our ultimate goal.
+
+[![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
+
+## ➤ Contributors
+[<img alt="HeeYoun Kim" src="https://avatars.githubusercontent.com/u/52766951?v=4" width="100">](https://github.com/miiunii) | [<img alt="YongWook Lee" src="https://avatars2.githubusercontent.com/u/46441280?s=460&v=4" width="100">](https://instagram.com/yongwookLee) | [<img alt="JeongMin Lee" src="https://avatars.githubusercontent.com/u/53992007?v=44" width="100">](https://github.com/hustle-dev) | [<img alt="Chaewon Jeong" src="https://avatars.githubusercontent.com/u/57611054?v=4" width="100">](https://github.com/chaewon1121) |
+|:-----:|:-----:|:-----:|:-----:|
+| [HeeYoun Kim](hhttps://github.com/miiunii) | [YongWook Lee](https://github.com/yongwookLee)  | [JeongMin Lee](https://instagram.com/hustle-dev)      | [Chaewon Jeong](https://github.com/chaewon1121)   | 
+| 🐹  | 🐻‍❄️  | 🐵    | 🐶  | 
+| Back-end Developer  | Front-end Developer  | Smart Contract Developer    | Product Manager  | 
+
 
 <h3> 7. Results </h3>
 
