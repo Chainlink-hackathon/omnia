@@ -68,7 +68,12 @@ Approximately, we designed the architecture as follows: Since it is a developmen
 <br>
 
 ---
-<h3>5.  Benefits </h3>
+<h3>5.  Expected Benefits </h3>
+
+#### Ensured Revenue Model
+
+#### Scability & Flexibility
+
 
 <h3> 6. Develop Process </h3>
 
