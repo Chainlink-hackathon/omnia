@@ -64,7 +64,7 @@ In addition, in addition to the automatic upload function that Verifier automati
 
 <h3> 4. Service Architecture </h3>
 
-<img src="./markdown_img/SAR.png">
+<img src="./markdown_img/SA!.png">
 Approximately, we designed the architecture as follows: Since it is a development demonstration, Verifier is difficult to recruit in reality, so it will be recruited and shown in future projects. Development is being carried out based on that architecture, and more detailed development and architecture will be uploaded at the final announcement.
 <br>
 
@@ -299,26 +299,95 @@ Using React, express(nodejs framework), we made web server for communicating wit
 >        }
 >    }
 >```
-> 8. ***withdraw()*** —> All balance withdrawals in the contract
+> 8. ***withdrawForadmin()*** —> All balance withdrawals in the contract
+> ```js
+>function withdrawForadmin() public {
+>        require(owner == msg.sender);
+>        owner.transfer(address(this).balance);
+>    }
+> ```
 > 
-> 9. ***withdraw(uintamount)*** —> a function that allows withdrawals and payments to be made only by those authorized to pay insurance.
+> 9. ***withdrawForclient(uint256 amount)*** —> a function that allows withdrawals and payments to be made only by those authorized to pay insurance.
 > 
-> 10. A function of handing out insurance money (to the uninsured)
+>```js
+>function withdrawForclient(uint256 amount) public {
+>        require(clientInfo[msg.sender].status == 1); // can withdraw when they have right to withdraw.
+>        require(address(this).balance >= amount);
+>        remain -= amount;
+>        amount = amount * unit;
+>        // clientInfo[msg.sender].balances -= amount;
+>        clientInfo[msg.sender].status = 0;
+>        numOfrecevied++;
+>        msg.sender.transfer(amount);
+>    } 
+>```
+> 10. ***divideInsurancePayment()*** —> Distribute insurance money to those who are not involved in the accident.
 >
-> 11. **insurancePayment()** —> a function that customers pay for insurance (1 ether default)
+>```js
+>function divideInsurancePayment() public {
+>        require(owner == msg.sender);
+>        moneyTohost = (remain*unit) + (address(this).balance * 5 / 100);
+>        owner.transfer(moneyTohost);
+>        numOfdistribute = keyList.length - numOfrecevied;
+>        dtbMoney = (address(this).balance / numOfdistribute);
+>        for (uint i = 0; i< keyList.length; i++)
+>        {
+>            if(clientInfo[keyList[i]].status == 0)
+>            {
+>                keyList[i].transfer(dtbMoney);
+>                clientInfo[keyList[i]].balances = 0;
+>            }
+>        }
+>     }
+>```
+>
+> 11. **insurancePayment()** —> a function that customers pay for insurance (0.1 ether default)
 > 
+>```js
+>function insurancePayment() public payable {
+>        require(msg.value == 0.1 ether, "0.1 ether cost per month!");
+>        clientInfo[msg.sender].balances += msg.value;
+>        keyList.push(msg.sender);
+>    }
+>```
 > 12. ***size()*** —> Shows the number of people insured
 > 
+>```js
+>function size() public view returns (uint) {
+>        return uint(keyList.length);
+>    }
+>```
+>
 > 13. ***Balance()*** —> Show how much insurance you put in
-> 
+>
+>```js 
+>function balance() public view returns (uint256) {
+>        return clientInfo[msg.sender].balances;
+>    }
+>```
 > 14. ***getInsuranceBalance()*** —> Shows the balance currently in this contract
 > 
+>```js
+>    function getInsruanceBalance() public view returns (uint256) {
+>        return address(this).balance;
+>    }
+>```
 > 15. ***payTarget()*** —> You can check if you are eligible for insurance Payable Must not be 0 and must be 1 to be eligible for insurance payTarget()
 > 
-> 16. ***withdrawLINK()*** —> To perform a chainlink related function, you can send and use linktoken to this contract, which returns the remaining
-> linktoken.
-
-
+>```js
+>    function payTarget() public view returns (uint256) {
+>        return clientInfo[msg.sender].status;
+>    }
+>```
+> 16. ***withdrawLINK()*** —> To use chainlink, contract has some LINK token and after the end, rest of LINK will be recalled 
+> 
+>```js
+>    function withdrawLINK() external {
+>        require(owner == msg.sender);
+>        LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
+>        require(linkToken.transfer(msg.sender, linkToken.balanceOf(address(this))), "Unable to transfer");
+>    }
+>```
 
 
 ---
