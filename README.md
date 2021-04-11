@@ -68,8 +68,9 @@ Approximately, we designed the architecture as follows: Since it is a developmen
 <br>
 
 ---
+<h3>5.  Benefits </h3>
 
-<h3> 5. Develop Process </h3>
+<h3> 6. Develop Process </h3>
 
 <img src="./markdown_img/Develop_process.png">
 
@@ -198,5 +199,4 @@ Using React, express(nodejs framework), we made web server for communicating wit
 
 ---
 
-<h3>6.  Benefits </h3>
 
