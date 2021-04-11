@@ -73,7 +73,54 @@ Approximately, we designed the architecture as follows: Since it is a developmen
 
 <img src="./markdown_img/Develop_process.png">
 
-Using React, express(nodejs framework) and truffle, we will make web server for communicating with client. React for client screen, express for backend server and truffle for smartcontract deploy. Also we will make smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. 
+Using React, express(nodejs framework), we made web server for communicating with client. React for client screen, express for backend server and truffle for smartcontract deploy. Also we made smartcontract for the insurance on the insurance page. This operates insurance payment when accidents when an accident occurred and it was certified. It is also operated when an accident does not occur and is overdue. The chainlink node will be built for importing the insurer's external data into the blockchain network. Also, we made database for managing user's data using MySQL and connected AAVE API for defi staking. 
+
+###  Languages and Frameworks & version 
+
+#### Common
+
+| Languages and Frameworks | version |
+| --- | --- |
+| yarn | 1.22.10 |
+
+#### Client
+
+| Languages and Frameworks | version |
+| --- | --- |
+| react | 17.0.2 |
+| react-dom | 17.0.2 |
+| react-router-dom | 5.2.0 |
+| react-scripts | 4.0.3 |
+| react-transition-group | 4.4.1 |
+| styled-components | 5.2.3 |
+| typescript | 4.1.2 |
+
+#### Server
+
+| Languages and Frameworks | version |
+| --- | --- |
+| node.js | 12.18 |
+| postgreSQL | >=11 |
+| nvm | 0.38.0 |
+| cors | 2.8.5 |
+| ejs | 3.1.6 |
+| express | 4.17.1 |
+| express-react-views | 0.11.0 |
+| express-session | 1.17.1 |
+| morgan | 1.10.0 |
+| mustache | 4.2.0 |
+| nodemon | 2.0.7 |
+| path | 0.12.7 |
+| session-file-store | 1.5.0 |
+| ts-node | 9.1.1 |
+
+#### Smart Contract
+
+| Languages and Frameworks | version |
+| --- | --- |
+| geth | 1.8+ |
+| solidity compiler | 0.6.12 |
+
 
 ---
 
