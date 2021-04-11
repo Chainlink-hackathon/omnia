@@ -34,6 +34,7 @@ As such, we decided to make catchphrase in hopes of safely distributing risks th
 Namely, We created a platform called ‘Omnia’ to give people a well-being life by creating an insurance platform that can safely distribute risks with blockchain.
 
 
+---
 
 <h3>3.  Service Features </h3>
 
