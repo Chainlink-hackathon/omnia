@@ -458,10 +458,9 @@ Please consider that the speed is a bit slow using the free domain.
 ## ➤ Contributors
 [<img alt="HeeYoun Kim" src="https://avatars.githubusercontent.com/u/52766951?v=4" width="100">](https://github.com/miiunii) | [<img alt="YongWook Lee" src="https://avatars2.githubusercontent.com/u/46441280?s=460&v=4" width="100">](https://instagram.com/yongwookLee) | [<img alt="JeongMin Lee" src="https://avatars.githubusercontent.com/u/53992007?v=44" width="100">](https://github.com/hustle-dev) | [<img alt="Chaewon Jeong" src="https://avatars.githubusercontent.com/u/57611054?v=4" width="100">](https://github.com/chaewon1121) |
 |:-----:|:-----:|:-----:|:-----:|
-| [HeeYoun Kim](hhttps://github.com/miiunii) | [YongWook Lee](https://github.com/yongwookLee)  | [JeongMin Lee](https://instagram.com/hustle-dev)      | [Chaewon Jeong](https://github.com/chaewon1121)   | 
+| [HeeYoun Kim](https://github.com/miiunii) | [YongWook Lee](https://github.com/yongwookLee)  | [JeongMin Lee](https://instagram.com/hustle-dev)      | [Chaewon Jeong](https://github.com/chaewon1121)   | 
 | 🐹  | 🐻‍❄️  | 🐵    | 🐶  | 
 | Back-end Developer  | Front-end Developer  | Smart Contract Developer    | Product Manager  | 
-
 
 
 
