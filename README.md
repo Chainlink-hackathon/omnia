@@ -147,18 +147,59 @@ Using React, express(nodejs framework), we made web server for communicating wit
 > 
 > - request -> user can purchase insurance with this request. It requires user's confirmation code, user's name, Insurance's end date
 > and user's wallet address.
+> ```json
+> // Request Body
+> {
+>    confirmationCode: String,
+>    name: String,
+>    dueDate: Date,
+>    walletAddress: String
+>  }
+> ```
 > 
 > - DB Query -> Insert user's data into insurance table.
+>```mysql
+>INSERT into insurance(confirmation_code, name, due_date, wallet_address) VALUES(?, ?, ?, ?)
+>```
 > 
 > - response -> If there is an error, response error or not response success code.
+>```json
+>// Success Response Body
+>{
+>   code: 1
+>}
+>
+>// Fail Response Body
+>{
+>   code: 0
+>}
+>```
 > 
 ***> 2. Get My Insurance Data ( '/api/myPage' )***
 > 
 > - request -> User can check he or she's insurance data with this request. It requires user's wallet address.
+>```json
+>// Request Body
+>{
+>   walletAddress: String
+>}
+>```
 > 
 > - DB Query -> SELECT insurance data which user purchased from insurance table.
+>```mysql
+>SELECT * FROM insurance WHERE wallet_address=?
+>```
 > 
 > - response -> If there is an error, response error or not response insurance data
+>```json
+>// Response Body
+>{
+>   confirmationCode: String,
+>   name: String,
+>   dueDate: Date
+>}
+>```
+>
 
 #### c. Smart Contract
 
