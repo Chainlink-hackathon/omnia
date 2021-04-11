@@ -398,7 +398,7 @@ Using React, express(nodejs framework), we made web server for communicating wit
 [![——————————————————————————](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 <h3> 6. What's next for Omnia </h3>
----
+
 If the competitive edge is verified through this competition, it will start a business so that it can become a real service.
 
 We think it is important to recruit customers because of our item characteristics(*p2p platform*). This is because the types of insurance generated within the platform will vary only when customers gather, and we think this will soon create a virtuous cycle that brings in another customer.
