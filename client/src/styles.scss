@@ -1,0 +1,21 @@
+$violet: #5F55AC;
+$white: #FFFFFF;
+
+.Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: $violet;
+    font-family: 'SCoreDream';
+    font-weight: 700;
+    font-size: 18px;
+    color: $white;
+    width: 163px;
+    height: 42px;
+    letter-spacing: 0.1em;
+    line-height: 21px;
+    border-radius: 21px;
+
+    cursor: pointer;
+}

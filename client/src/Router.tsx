@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
   Switch,
   Route,
   withRouter,
   RouteComponentProps,
-} from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import Loading from './pages/Intro/intro';
-import Main from './pages/Main/main';
-import InsuranceList from './pages/InsuranceList/insuranceList';
+} from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Loading from "./pages/Intro/intro";
+import Main from "./pages/Main/main";
+import InsuranceList from "./pages/InsuranceList/insuranceList";
+import InsuranceDetail from "./pages/InsuranceDetail/insuranceDetail";
 
 interface MatchParams {
   id: string;
@@ -26,12 +27,20 @@ function Router({ location }: RouteComponentProps<MatchParams>) {
           <Switch location={location}>
             <Route
               exact
-              path={process.env.PUBLIC_URL + '/'}
+              path={process.env.PUBLIC_URL + "/"}
               component={Loading}
             />
             <Route path="/main" component={Main} />
             <Route path="/insuranceList" component={InsuranceList} />
+            <Route path="/insuranceDetail" component={InsuranceDetail} />
           </Switch>
+          <Route
+              path="/about-project"
+              component={() => {
+                window.location.href = "https://www.youtube.com/channel/UC9d9qkh7a8GI03utOPHBwDg";
+                return null;
+              }}
+            />
         </section>
       </CSSTransition>
     </TransitionGroup>

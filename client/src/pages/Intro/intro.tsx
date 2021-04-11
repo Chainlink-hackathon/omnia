@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import { WaveGroup } from './wavegroup.js';
 import Logo from '../../assets/Loading_logo.png';
 import { Link } from 'react-router-dom';
+import { Wave } from './wave.js';
 
 export default function Intro(): JSX.Element {
   let canvas: any;
@@ -56,6 +57,7 @@ export default function Intro(): JSX.Element {
             width: '686px',
             height: '652px',
           }}
+          alt="Logo"
         />
       </Link>
     </>
