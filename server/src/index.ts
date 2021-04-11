@@ -6,230 +6,6 @@ import logger from 'morgan';
 import cors from 'cors';
 import * as engines from 'consolidate';
 import * as mysql from 'mysql';
-import Web3 from 'web3';
-
-const web3 = new Web3(
-  'https://kovan.infura.io/v3/abe6788b40e4426a94699ef6da5eaf11'
-);
-const insuranceContract = new web3.eth.Contract(
-  [
-    {
-      inputs: [],
-      stateMutability: 'payable',
-      type: 'constructor',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'bytes32',
-          name: 'id',
-          type: 'bytes32',
-        },
-      ],
-      name: 'ChainlinkCancelled',
-      type: 'event',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'bytes32',
-          name: 'id',
-          type: 'bytes32',
-        },
-      ],
-      name: 'ChainlinkFulfilled',
-      type: 'event',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'bytes32',
-          name: 'id',
-          type: 'bytes32',
-        },
-      ],
-      name: 'ChainlinkRequested',
-      type: 'event',
-    },
-    {
-      inputs: [],
-      name: 'depositTolending',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'divideInsurancePayment',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'bytes32',
-          name: '_requestId',
-          type: 'bytes32',
-        },
-        {
-          internalType: 'uint256',
-          name: '_volume',
-          type: 'uint256',
-        },
-      ],
-      name: 'fulfillAlarm',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'targetClient',
-          type: 'address',
-        },
-      ],
-      name: 'giveRight',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'insurancePayment',
-      outputs: [],
-      stateMutability: 'payable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'uint256',
-          name: 'durationInSeconds',
-          type: 'uint256',
-        },
-      ],
-      name: 'requestAlarmClock',
-      outputs: [
-        {
-          internalType: 'bytes32',
-          name: 'requestId',
-          type: 'bytes32',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'uint256',
-          name: 'amount',
-          type: 'uint256',
-        },
-      ],
-      name: 'withdraw',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'withdraw',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'withdrawFromlending',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'withdrawLINK',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'balance',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'clstatus',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getInsruanceBalance',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'payTarget',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'size',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-  ],
-  '0xE31485d46C678514889fEbb0b0D4c3B255404d32'
-);
 
 // Routing
 import { indexRouter } from './routes/index';
@@ -243,6 +19,11 @@ app.use(express.static(path.join(__dirname, '../../client/build')));
 app.engine('html', engines.mustache);
 app.set('views', path.join(__dirname, '../../client/build'));
 app.set('view engine', 'html');
+
+// Web3 Test
+// app.use(express.static(path.join(__dirname, '../src/public')));
+// app.set('views', path.join(__dirname, '../src/views'));
+// app.set('view engine', 'ejs');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -269,14 +50,6 @@ app.post('/api/create', async (req, res) => {
   const dueDate = req.body.dueDate;
   const walletAddress = req.body.walletAddress;
 
-  const insuranceData = await insuranceContract.methods
-    .insurancePayment()
-    .send({ from: '0x782F8853443AB778784DdF03D6835d7d068641F6' })
-    .on('receipt', (receipt: any) => {
-      console.log(receipt);
-      return receipt;
-    });
-
   conn.query(
     `INSERT INTO insurance(confirmation_code, name, due_date, wallet_address) VALUES(?, ?, ?, ?)`,
     [code, name, dueDate, walletAddress],
@@ -287,7 +60,6 @@ app.post('/api/create', async (req, res) => {
       } else {
         res.json({
           code: 1,
-          insuranceInfo: insuranceData,
         });
       }
     }
@@ -297,16 +69,6 @@ app.post('/api/create', async (req, res) => {
 // Get Insurance Data
 app.post('/api/myPage', async (req, res) => {
   const walletAddress = req.body.walletAddress;
-
-  const balance = await insuranceContract.methods
-    .balance()
-    .call()
-    .then(console.log);
-
-  const contractBalance = await insuranceContract.methods
-    .getInsruanceBalance()
-    .call()
-    .on(console.log);
 
   conn.query(
     `SELECT * FROM insurance WHERE wallet_address=?`,
@@ -321,25 +83,10 @@ app.post('/api/myPage', async (req, res) => {
           confirmationCode: rows[0].confirmation_code,
           name: rows[0].name,
           dueDate: rows[0].due_date,
-          balance: balance,
-          contractBalance: contractBalance,
         });
       }
     }
   );
-});
-
-// Get Ether back
-app.post('/api/withdraw', async (req, res) => {
-  await insuranceContract.methods
-    .withdraw(1)
-    .send()
-    .on('receipt', (receipt: any) => {
-      console.log(receipt);
-      res.json({
-        receipt: receipt,
-      });
-    });
 });
 
 // catch 404 and forward to error handler
