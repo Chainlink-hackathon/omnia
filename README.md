@@ -133,9 +133,9 @@ Using React, express(nodejs framework), we made web server for communicating wit
 ---
 ### Details
 #### a. Front-end
-> ***1. Main Page*** : In this page, there are import three features about service omnia (Reimbursement, Reliable procedure, User-friendly interface). Read informations carefully at >this page. At the end of this page there is footer which has member's data <br><br>
-> ***2. Insurance List Page*** : In this page, users can select what insurance is fit to him or her. There are six kinds of insurance (Health care, Pet, Car Rental, Accomodation, >Kickboard, Keyperson). If user wants to know about insurance, just click the image. And then users can know that insurance's features. Also at the end of page, there is a insurance >suggest program. If you curious that what insurance is fit to you click the suggest! At last you also sign up to insurance through Metamask transaction. <br><br>
-> ***3. My Page*** : At this page, users can watch all of informations about user's data and insurance'data. Such as users' address, users'confirmation code, due date etc ... If you >want to expire insurance, It is really easy. Just click withdraw button! <br>
+> ***1. Main Page*** : In this page, there are important three features about service omnia (Reimbursement, Reliable procedure, User-friendly interface). Read informations carefully at this page. At the end of this page there is footer which has member's data <br><br>
+> ***2. Insurance List Page*** : In this page, users can select what insurance is fit to him or her. There are six kinds of insurance (Health care, Pet, Car Rental, Accomodation, Kickboard, Keyperson). If user wants to know about insurance, just click the image. And then users can know that insurance's features. Also at the end of page, there is a insurance suggest program. If you curious that what insurance is fit to you click the suggest! At last you also sign up to insurance through Metamask transaction. <br><br>
+> ***3. My Page*** : At this page, users can watch all of informations about user's data and insurance'data. Such as users' address, users'confirmation code, due date etc ... If you want to expire insurance, It is really easy. Just click withdraw button! <br>
 #### b. Back-end
 
 **< Overview >**
