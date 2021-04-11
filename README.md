@@ -451,9 +451,11 @@ Please consider that the speed is a bit slow using the free domain.
 
 #### DEMO Video
 
+https://youtu.be/W5YVbma8Xwo
 
+#### Description ULR
 
-
+https://devpost.com/software/omnia-0yxsho
 
 ## ➤ Contributors
 [<img alt="HeeYoun Kim" src="https://avatars.githubusercontent.com/u/52766951?v=4" width="100">](https://github.com/miiunii) | [<img alt="YongWook Lee" src="https://avatars2.githubusercontent.com/u/46441280?s=460&v=4" width="100">](https://instagram.com/yongwookLee) | [<img alt="JeongMin Lee" src="https://avatars.githubusercontent.com/u/53992007?v=44" width="100">](https://github.com/hustle-dev) | [<img alt="Chaewon Jeong" src="https://avatars.githubusercontent.com/u/57611054?v=4" width="100">](https://github.com/chaewon1121) |
