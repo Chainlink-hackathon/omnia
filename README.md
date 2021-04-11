@@ -42,7 +42,7 @@ We serve as a platform for connecting small needs that individuals have. It recr
 ---
 
 <h4> Service Process </h4>
-<img src="./markdown_img/Process.png">
+<img src="./markdown_img/flow.png">
 <br>
 <h4> Omnia's Advantages </h4>
 <img src="./markdown_img/f1.png">
