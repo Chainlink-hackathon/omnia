@@ -202,8 +202,8 @@ Using React, express(nodejs framework), we made web server for communicating wit
 
 #### c. Smart Contract
 
-> 1. ***Client structure***: Depending on the state and the amount of money deposited by the person, 0 means no insurance payment and 1 means no
-> insurance payment.
+> 1. ***Client structure***: Depending on the state and the amount of money deposited by the person, 0 means not insurance payment target and 1 means 
+> insurance payment target
 > ```js
 > struct Client {
 >        uint status; // not tartget = 0, target = 1
