@@ -453,7 +453,7 @@ Please consider that the speed is a bit slow using the free domain.
 
 https://youtu.be/W5YVbma8Xwo
 
-#### Description ULR
+#### Description URL
 
 https://devpost.com/software/omnia-0yxsho
 
